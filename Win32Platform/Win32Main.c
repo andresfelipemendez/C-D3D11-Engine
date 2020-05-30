@@ -1,4 +1,7 @@
+//#define WIN32_LEAN_AND_MEAN
 #include <windows.h>
+#include <strsafe.h>
+
 #include <stdint.h>
 #include <stdbool.h>
 
@@ -8,6 +11,8 @@
 #include <D3DX10math.h>
 #include <XInput.h>
 
+#include "rendering.h"
+
 #include "../Engine/engine.h"
 
 typedef struct
@@ -16,6 +21,15 @@ typedef struct
     D3DXMATRIX view;
     D3DXMATRIX projection;
 } MatrixBufferType;
+
+typedef struct
+{
+    HMODULE gameCodeDLL;
+    FILETIME DLLLastWriteTime;
+    start *Start;
+    update *Update;
+   // render_frame *RenderFrame;
+} win32_engine_code;
 
 //todo: this should come from the engine
 const int SCREEN_WIDTH = 800;
@@ -84,6 +98,11 @@ void checkres(HRESULT hr)
 	}
 }
 
+void_pChar(Win32Print)
+{
+    OutputDebugStringA(message);
+}
+
 LRESULT CALLBACK
 Win32MainWindowCallback(HWND Window,
 	UINT Message,
@@ -143,14 +162,86 @@ Win32MainWindowCallback(HWND Window,
 	return DefWindowProc(Window, Message, WParam, LParam);
 }
 
+inline FILETIME Win32GetLastWriteTime(char *Filename)
+{
+    FILETIME lastWriteTime = {0};
+    WIN32_FIND_DATA FindData;
+    HANDLE FindHandle = FindFirstFile(Filename, &FindData);
+    if(FindHandle != INVALID_HANDLE_VALUE)
+    {
+        lastWriteTime = FindData.ftLastWriteTime;
+        FindClose(FindHandle);
+    }
+    return (lastWriteTime);
+}
+
+void ErrorExit(LPTSTR lpszFunction) 
+{ 
+    LPVOID lpMsgBuf;
+    LPVOID lpDisplayBuf;
+    DWORD dw = GetLastError(); 
+
+    FormatMessage(
+        FORMAT_MESSAGE_ALLOCATE_BUFFER | 
+        FORMAT_MESSAGE_FROM_SYSTEM |
+        FORMAT_MESSAGE_IGNORE_INSERTS,
+        NULL,
+        dw,
+        MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT),
+        (LPTSTR) &lpMsgBuf,
+        0, NULL );
+
+    lpDisplayBuf = (LPVOID)LocalAlloc(LMEM_ZEROINIT, 
+        (lstrlen((LPCTSTR)lpMsgBuf) + lstrlen((LPCTSTR)lpszFunction) + 40) * sizeof(TCHAR)); 
+    StringCchPrintf((LPTSTR)lpDisplayBuf, 
+        LocalSize(lpDisplayBuf) / sizeof(TCHAR),
+        TEXT("%s failed with error %d: %s"), 
+        lpszFunction, dw, lpMsgBuf); 
+    MessageBox(NULL, (LPCTSTR)lpDisplayBuf, TEXT("Error"), MB_OK); 
+
+    LocalFree(lpMsgBuf);
+    LocalFree(lpDisplayBuf);
+    ExitProcess(dw); 
+}
+
+static win32_engine_code Wind32LoadGame(void)
+{
+    win32_engine_code engineMethods = {0};
+
+    LPCTSTR SourceDLLName = L"Engine.dll";
+    LPCTSTR TempDLLName = L"engine_temp.dll";
+
+    engineMethods.DLLLastWriteTime = Win32GetLastWriteTime(SourceDLLName);
+    if(CopyFile(SourceDLLName, TempDLLName, false)) {
+        OutputDebugStringA("success copy engine_temp dll  ");
+	} else {
+		ErrorExit(TEXT("CopyFile"));
+	}
+
+    engineMethods.gameCodeDLL = LoadLibrary(TempDLLName);
+    if (engineMethods.gameCodeDLL)
+    {
+        engineMethods.Start = (start *)GetProcAddress(engineMethods.gameCodeDLL, "Start");
+    } else {
+		ErrorExit(TEXT("load engine lib"));
+    }
+
+    if (engineMethods.Start != NULL)
+    {
+		OutputDebugStringA("success loaded render function");
+    } else {
+		ErrorExit(TEXT("load start method"));
+    }
+
+    return (engineMethods);
+}
+
 int CALLBACK
 WinMain(HINSTANCE Instance,
 	HINSTANCE PrevInstance,
 	LPSTR CommandLine,
 	int ShowCode)
 {
-	GameMemory gameMemory;
-
 	HWND WindowHandle;
 	WNDCLASSEX wnd;
 	ZeroMemory(&wnd, sizeof(WNDCLASSEX));
@@ -383,6 +474,12 @@ WinMain(HINSTANCE Instance,
 	D3DXMatrixTranspose(&viewMatrix, &viewMatrix);
 	D3DXMatrixTranspose(&projectionMatrix, &projectionMatrix);
 
+	GameMemory gameMemory = {0};
+	gameMemory.Print = Win32Print;
+	gameMemory.CreateIndexBuffer = CreateIndexBuffer;
+	win32_engine_code engineMethods = {0};
+    engineMethods = Wind32LoadGame();
+	engineMethods.Start(&gameMemory);
 	MSG Message = { 0 };
 	while (true)
 	{

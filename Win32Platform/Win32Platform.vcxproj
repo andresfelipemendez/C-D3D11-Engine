@@ -96,6 +96,9 @@
       <AdditionalLibraryDirectories>C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Lib\x86;C:\Program Files (x86)\Windows Kits\10\Lib\10.0.18362.0\um\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>User32.lib;Gdi32.lib;dxguid.lib;DXGI.lib;D3D11.lib;D3DCompiler.lib;D3dx9.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy /y $(ProjectDir)shader.shader $(OutDir)</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -126,6 +129,9 @@
       <AdditionalLibraryDirectories>C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Lib\x86;C:\Program Files (x86)\Windows Kits\10\Lib\10.0.18362.0\um\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>User32.lib;Gdi32.lib;dxguid.lib;DXGI.lib;D3D11.lib;D3DCompiler.lib;D3dx9.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy /y $(ProjectDir)shader.shader $(OutDir)</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -144,6 +150,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="rendering.c" />
     <ClCompile Include="Win32Main.c" />
   </ItemGroup>
   <ItemGroup>
@@ -153,6 +160,9 @@
     <ProjectReference Include="..\Engine\Engine.vcxproj">
       <Project>{70506eaa-03c3-4e2d-81dc-08e4834d9e92}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="rendering.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
