@@ -18,8 +18,16 @@
     <ClCompile Include="Win32Main.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="rendering.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="shader.shader" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="rendering.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
