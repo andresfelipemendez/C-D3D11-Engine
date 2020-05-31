@@ -5,12 +5,6 @@
 #include <stdint.h>
 #include <stdbool.h>
 
-#include <d3d11.h>
-#include <d3dcompiler.h>
-#include <D3DX11async.h>
-#include <D3DX10math.h>
-#include <XInput.h>
-
 #include "rendering.h"
 
 #include "../Engine/engine.h"
@@ -28,28 +22,11 @@ typedef struct
     FILETIME DLLLastWriteTime;
     start *Start;
     update *Update;
-   // render_frame *RenderFrame;
 } win32_engine_code;
 
 //todo: this should come from the engine
 const int SCREEN_WIDTH = 800;
 const int SCREEN_HEIGHT = 600;
-
-ID3D11Device* d3ddev;
-ID3D11DeviceContext* d3dctx;
-IDXGISwapChain* sc;
-
-ID3D11Texture2D* d3dbb;
-ID3D11RenderTargetView* view;
-
-ID3D11InputLayout* m_layout;
-ID3D11VertexShader* pVS;
-ID3D11PixelShader* pPS;
-
-ID3D11Buffer* g_pIndexBuffer = NULL;
-ID3D11Buffer* g_pVertexBuffer = NULL;
-
-ID3D11Buffer *m_matrixBuffer;
 
 void checkres(HRESULT hr)
 {
@@ -101,6 +78,7 @@ void checkres(HRESULT hr)
 void_pChar(Win32Print)
 {
     OutputDebugStringA(message);
+	OutputDebugStringA("\n");
 }
 
 LRESULT CALLBACK
@@ -213,7 +191,7 @@ static win32_engine_code Wind32LoadGame(void)
 
     engineMethods.DLLLastWriteTime = Win32GetLastWriteTime(SourceDLLName);
     if(CopyFile(SourceDLLName, TempDLLName, false)) {
-        OutputDebugStringA("success copy engine_temp dll  ");
+        OutputDebugStringA("success copy engine_temp dll\n");
 	} else {
 		ErrorExit(TEXT("CopyFile"));
 	}
@@ -228,7 +206,7 @@ static win32_engine_code Wind32LoadGame(void)
 
     if (engineMethods.Start != NULL)
     {
-		OutputDebugStringA("success loaded render function");
+		OutputDebugStringA("success loaded render function\n");
     } else {
 		ErrorExit(TEXT("load start method"));
     }

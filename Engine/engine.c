@@ -9,25 +9,27 @@ vector3 add(vector3 a, vector3 b)
     return r;
 }
 
+void localPrint(char* text){
+    pPrint(text);
+}
+
 void_pGameMemory(Start) {
 
-    Print = memory->Print;
-    Print("hi");
+    ptr = malloc(sizeof(void*));
+    ptr = memory->Print;
 
-   /* renderComponents = malloc(sizeof(RenderComponent)* 512);
-    numRenderComponents = 0;*/
+    pCreateIndexBuffer = malloc(sizeof(void*));
+    pCreateIndexBuffer = memory->CreateIndexBuffer;
+
 
     //Add Entity
     unsigned int indices[] = {0, 1, 2};
-    void* iv = memory->CreateIndexBuffer(indices, 3);
-    //renderComponents[numRenderComponents].indices = iv;
-    
+	SimpleVertexCombined verticesCombo[] = {
+		{{0.0f, 0.5f, 0.0f}, {0.0f, 0.0f, 0.5f}},
+		{{0.5f, -0.5f, 0.0f}, {0.5f, 0.0f, 0.5f}},
+		{{-0.5f, -0.5f, 0.0f}, {0.0f, 0.5f, 0.5f}}
+	};
 
-    SimpleVertexCombined verticesCombo[3] = {
-        {{0.0f, 0.5f, 0.0f}, {0.0f, 0.0f, 0.5f}},
-        {{0.5f, -0.5f, 0.0f}, {0.5f, 0.0f, 0.5f}},
-        {{-0.5f, -0.5f, 0.0f}, {0.0f, 0.5f, 0.5f}}
-    };
-    
-    //registerSystem(&renderSystem);
+	CreateRenderingComponent(indices, NELEMS(indices), verticesCombo, NELEMS(verticesCombo));
+
 }
