@@ -6,6 +6,7 @@ typedef struct {
 } SimpleVertexCombined;
 
 typedef struct {
+	unsigned int numIndices;
 	void* pIndexBuffer;
 	void* pVertexBuffer;
 } RenderingComponent;

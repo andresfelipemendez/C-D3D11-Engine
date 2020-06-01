@@ -11,9 +11,7 @@ void renderingSystem(void)
 	for (int i = 0; i < *pNumRenderingComponents; i++)
 	{
 		RenderingComponent rc = (*p);
-		void* indexBuffer = rc.pIndexBuffer;
-		void* vertexBuffer = rc.pVertexBuffer;
-		setBuffers(indexBuffer, vertexBuffer);
+		setBuffers(rc.numIndices, rc.pIndexBuffer, rc.pVertexBuffer);
 		p++;
 
 	}

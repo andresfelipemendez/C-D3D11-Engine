@@ -28,7 +28,7 @@ void* CreateVertexBuffer(SimpleVertexCombined* vertices, unsigned int size)
 	D3D11_BUFFER_DESC bufferDesc;
 	ZeroMemory(&bufferDesc, sizeof(bufferDesc));
 	bufferDesc.Usage = D3D11_USAGE_DYNAMIC;
-	bufferDesc.ByteWidth = sizeof(vertices[0]) * 3;
+	bufferDesc.ByteWidth = sizeof(vertices[0]) * size;
 	bufferDesc.BindFlags = D3D11_BIND_VERTEX_BUFFER;
 	bufferDesc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
 
@@ -50,7 +50,7 @@ void* CreateVertexBuffer(SimpleVertexCombined* vertices, unsigned int size)
 	return pVertexBuffer;
 }
 
-void SetBuffers(void* indexBuffer, void* vertexBuffer) {
+void SetBuffers(unsigned int numIndices, void* indexBuffer, void* vertexBuffer) {
 
 	unsigned int off = 0;
 	unsigned int str = sizeof(SimpleVertexCombined);
@@ -58,5 +58,5 @@ void SetBuffers(void* indexBuffer, void* vertexBuffer) {
 	d3dctx->lpVtbl->IASetVertexBuffers(d3dctx, 0, 1, &vertexBuffer, &str, &off);
 	d3dctx->lpVtbl->IASetPrimitiveTopology(d3dctx, D3D10_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
-	d3dctx->lpVtbl->Draw(d3dctx, 3, 0);
+	d3dctx->lpVtbl->DrawIndexed(d3dctx, numIndices, 0, 0);
 }

@@ -26,11 +26,13 @@ void_pGameMemory(Start) {
 
     initSystemManager();
 
-    unsigned int indices[] = {0, 1, 2};
+    unsigned int indices[] = {3, 1, 0, 0, 1, 2};
+
 	SimpleVertexCombined verticesCombo[] = {
-		{{0.0f, 0.5f, 0.0f}, {0.0f, 0.0f, 0.5f}},
-		{{0.5f, -0.5f, 0.0f}, {0.5f, 0.0f, 0.5f}},
-		{{-0.5f, -0.5f, 0.0f}, {0.0f, 0.5f, 0.5f}}
+		{{-1.0f,  1.0f, 0.0f}, {1.0f, 1.0f, 1.0f}},
+		{{-0.9f, -1.0f, 0.0f}, {1.0f, 1.0f, 1.0f}},
+		{{-1.0f, -1.0f, 0.0f}, {1.0f, 1.0f, 1.0f}},
+        {{-0.9f,  1.0f, 0.0f}, {0.1f, 0.5f, 1.0f}}
 	};
 
 	CreateRenderingComponent(indices, NELEMS(indices), verticesCombo, NELEMS(verticesCombo));
