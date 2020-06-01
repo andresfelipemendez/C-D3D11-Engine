@@ -1,8 +1,8 @@
 #include "rendering.h"
+#include "../Engine/RenderingComponent.h"
 
 void* CreateIndexBuffer(unsigned int* indices, unsigned int size)
 {
-
 	D3D11_BUFFER_DESC bufferDesc;
 	ZeroMemory(&bufferDesc, sizeof(bufferDesc));
 	bufferDesc.Usage = D3D11_USAGE_DEFAULT;
@@ -23,9 +23,8 @@ void* CreateIndexBuffer(unsigned int* indices, unsigned int size)
 	return pIndexBuffer;
 }
 
-void* CreateVertexBuffer(unsigned int* vertices, unsigned int size)
+void* CreateVertexBuffer(SimpleVertexCombined* vertices, unsigned int size)
 {
-	//D3D11_BUFFER_DESC bufferDesc;
 	D3D11_BUFFER_DESC bufferDesc;
 	ZeroMemory(&bufferDesc, sizeof(bufferDesc));
 	bufferDesc.Usage = D3D11_USAGE_DYNAMIC;
@@ -33,7 +32,6 @@ void* CreateVertexBuffer(unsigned int* vertices, unsigned int size)
 	bufferDesc.BindFlags = D3D11_BIND_VERTEX_BUFFER;
 	bufferDesc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
 
-	//D3D11_SUBRESOURCE_DATA InitData;
 	D3D11_SUBRESOURCE_DATA InitData;
 	ZeroMemory(&InitData, sizeof(InitData));
 	InitData.pSysMem = vertices;
@@ -43,6 +41,7 @@ void* CreateVertexBuffer(unsigned int* vertices, unsigned int size)
 	ID3D11Buffer* pVertexBuffer = 0;
 	d3ddev->lpVtbl->CreateBuffer(d3ddev, &bufferDesc, NULL, &pVertexBuffer);
 
+	unsigned int sovc = sizeof(vertices[0]) * size;
 	D3D11_MAPPED_SUBRESOURCE ms;
 	d3dctx->lpVtbl->Map(d3dctx, pVertexBuffer, NULL, D3D11_MAP_WRITE_DISCARD, NULL, &ms);
 	memcpy(ms.pData, vertices, sizeof(vertices[0]) * size);
@@ -52,5 +51,12 @@ void* CreateVertexBuffer(unsigned int* vertices, unsigned int size)
 }
 
 void SetBuffers(void* indexBuffer, void* vertexBuffer) {
-	int i = 0;
+
+	unsigned int off = 0;
+	unsigned int str = sizeof(SimpleVertexCombined);
+	d3dctx->lpVtbl->IASetIndexBuffer(d3dctx, indexBuffer, DXGI_FORMAT_R32_UINT, 0);
+	d3dctx->lpVtbl->IASetVertexBuffers(d3dctx, 0, 1, &vertexBuffer, &str, &off);
+	d3dctx->lpVtbl->IASetPrimitiveTopology(d3dctx, D3D10_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+
+	d3dctx->lpVtbl->Draw(d3dctx, 3, 0);
 }
