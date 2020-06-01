@@ -8,11 +8,11 @@ extern RenderingComponent* pRenderingComponents;
 void renderingSystem(void)
 {
 	RenderingComponent* p = pRenderingComponents; 
-	for (int i = 0; i < *pNumRenderingComponents; i++)
+	unsigned int numRenderingComponents = *pNumRenderingComponents;
+	for (int i = 0; i < numRenderingComponents; i++)
 	{
 		RenderingComponent rc = (*p);
 		setBuffers(rc.numIndices, rc.pIndexBuffer, rc.pVertexBuffer);
 		p++;
-
 	}
 }
