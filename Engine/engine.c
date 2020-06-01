@@ -26,7 +26,6 @@ void_pGameMemory(Start) {
 
     initSystemManager();
 
-    //Add Entity
     unsigned int indices[] = {0, 1, 2};
 	SimpleVertexCombined verticesCombo[] = {
 		{{0.0f, 0.5f, 0.0f}, {0.0f, 0.0f, 0.5f}},
@@ -35,8 +34,6 @@ void_pGameMemory(Start) {
 	};
 
 	CreateRenderingComponent(indices, NELEMS(indices), verticesCombo, NELEMS(verticesCombo));
-
-    
 
     registerSystem(renderingSystem);
 }

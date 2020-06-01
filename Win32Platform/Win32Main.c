@@ -341,61 +341,6 @@ WinMain(HINSTANCE Instance,
 	d3ddev->lpVtbl->CreateInputLayout(d3ddev, ied, 2, VS->lpVtbl->GetBufferPointer(VS), VS->lpVtbl->GetBufferSize(VS), &m_layout);
 	d3dctx->lpVtbl->IASetInputLayout(d3dctx, m_layout);
 
-	unsigned int indices[] = { 0, 1, 2 };
-
-	D3D11_BUFFER_DESC bufferDesc;
-	ZeroMemory(&bufferDesc, sizeof(bufferDesc));
-	bufferDesc.Usage = D3D11_USAGE_DEFAULT;
-	bufferDesc.ByteWidth = sizeof(unsigned int) * 3;
-	bufferDesc.BindFlags = D3D11_BIND_INDEX_BUFFER;
-	bufferDesc.CPUAccessFlags = 0;
-	bufferDesc.MiscFlags = 0;
-
-	D3D11_SUBRESOURCE_DATA InitData;
-	ZeroMemory(&InitData, sizeof(InitData));
-	InitData.pSysMem = indices;
-	InitData.SysMemPitch = 0;
-	InitData.SysMemSlicePitch = 0;
-
-	hr = d3ddev->lpVtbl->CreateBuffer(d3ddev, &bufferDesc, &InitData, &g_pIndexBuffer);
-	if (FAILED(hr))
-	{
-		checkres(hr);
-	}
-
-	SimpleVertexCombined verticesCombo[3] =
-	{
-		{{0.0f, 0.5f, 0.0f}, {0.0f, 0.0f, 0.5f}},
-		{{0.5f, -0.5f, 0.0f}, {0.5f, 0.0f, 0.5f}},
-		{{-0.5f, -0.5f, 0.0f}, {0.0f, 0.5f, 0.5f}}
-	};
-
-	//D3D11_BUFFER_DESC bufferDesc;
-	ZeroMemory(&bufferDesc, sizeof(bufferDesc));
-	bufferDesc.Usage = D3D11_USAGE_DYNAMIC;
-	bufferDesc.ByteWidth = sizeof(SimpleVertexCombined) * 3;
-	bufferDesc.BindFlags = D3D11_BIND_VERTEX_BUFFER;
-	bufferDesc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
-
-
-	//D3D11_SUBRESOURCE_DATA InitData;
-	ZeroMemory(&InitData, sizeof(InitData));
-	InitData.pSysMem = verticesCombo;
-	InitData.SysMemPitch = 0;
-	InitData.SysMemSlicePitch = 0;
-
-	hr = d3ddev->lpVtbl->CreateBuffer(d3ddev, &bufferDesc, NULL, &g_pVertexBuffer);
-
-	if (FAILED(hr))
-	{
-		checkres(hr);
-	}
-
-	D3D11_MAPPED_SUBRESOURCE ms;
-	d3dctx->lpVtbl->Map(d3dctx, g_pVertexBuffer, NULL, D3D11_MAP_WRITE_DISCARD, NULL, &ms);
-	memcpy(ms.pData, verticesCombo, sizeof(verticesCombo));
-	d3dctx->lpVtbl->Unmap(d3dctx, g_pVertexBuffer, NULL);
-
 	ShowWindow(WindowHandle, ShowCode);
 
 	vector3 up, position, lookAt;
@@ -457,9 +402,12 @@ WinMain(HINSTANCE Instance,
 	gameMemory.CreateIndexBuffer = CreateIndexBuffer;
 	gameMemory.CreateVertexBuffer = CreateVertexBuffer;
 	gameMemory.SetBuffers = SetBuffers;
+
 	win32_engine_code engineMethods = {0};
     engineMethods = Wind32LoadGame();
+
 	engineMethods.Start(&gameMemory);
+
 	MSG Message = { 0 };
 	while (true)
 	{
@@ -487,16 +435,8 @@ WinMain(HINSTANCE Instance,
 		bufferNumber = 0;
 		d3dctx->lpVtbl->VSSetConstantBuffers(d3dctx, bufferNumber, 1, &m_matrixBuffer);
 
-		// here?
 		engineMethods.Update(&gameMemory);
 
-		unsigned int off = 0;
-		unsigned int str = sizeof(SimpleVertexCombined);
-		d3dctx->lpVtbl->IASetIndexBuffer(d3dctx, g_pIndexBuffer, DXGI_FORMAT_R32_UINT, 0);
-		d3dctx->lpVtbl->IASetVertexBuffers(d3dctx, 0, 1, &g_pVertexBuffer, &str, &off);
-		d3dctx->lpVtbl->IASetPrimitiveTopology(d3dctx, D3D10_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-
-		d3dctx->lpVtbl->Draw(d3dctx, 3, 0);
 		HRESULT res = sc->lpVtbl->Present(sc, 0, 0);
 	}
 
