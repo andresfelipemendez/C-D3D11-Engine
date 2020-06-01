@@ -200,6 +200,7 @@ static win32_engine_code Wind32LoadGame(void)
     if (engineMethods.gameCodeDLL)
     {
         engineMethods.Start = (start *)GetProcAddress(engineMethods.gameCodeDLL, "Start");
+		engineMethods.Update = (update *)GetProcAddress(engineMethods.gameCodeDLL, "Update");
     } else {
 		ErrorExit(TEXT("load engine lib"));
     }
@@ -256,7 +257,6 @@ WinMain(HINSTANCE Instance,
 		return -1;
 	}
 
-	//InitD3D(WindowHandle);
 	IDXGIFactory* factory;
 	IDXGIAdapter* adapter;
 	IDXGIOutput* output;
@@ -455,6 +455,8 @@ WinMain(HINSTANCE Instance,
 	GameMemory gameMemory = {0};
 	gameMemory.Print = Win32Print;
 	gameMemory.CreateIndexBuffer = CreateIndexBuffer;
+	gameMemory.CreateVertexBuffer = CreateVertexBuffer;
+	gameMemory.SetBuffers = SetBuffers;
 	win32_engine_code engineMethods = {0};
     engineMethods = Wind32LoadGame();
 	engineMethods.Start(&gameMemory);
@@ -484,6 +486,9 @@ WinMain(HINSTANCE Instance,
 		d3dctx->lpVtbl->Unmap(d3dctx, m_matrixBuffer, 0);
 		bufferNumber = 0;
 		d3dctx->lpVtbl->VSSetConstantBuffers(d3dctx, bufferNumber, 1, &m_matrixBuffer);
+
+		// here?
+		engineMethods.Update(&gameMemory);
 
 		unsigned int off = 0;
 		unsigned int str = sizeof(SimpleVertexCombined);

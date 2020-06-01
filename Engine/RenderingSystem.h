@@ -1,3 +1,3 @@
 #pragma once
 
-void renderingSystem();
+void renderingSystem(void);

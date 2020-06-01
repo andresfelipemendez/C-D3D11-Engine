@@ -1,4 +1,5 @@
 #include "engine.h"
+#include "RenderingSystem.h"
 
 vector3 add(vector3 a, vector3 b)
 {
@@ -9,10 +10,6 @@ vector3 add(vector3 a, vector3 b)
     return r;
 }
 
-void localPrint(char* text){
-    pPrint(text);
-}
-
 void_pGameMemory(Start) {
 
     ptr = malloc(sizeof(void*));
@@ -21,6 +18,13 @@ void_pGameMemory(Start) {
     pCreateIndexBuffer = malloc(sizeof(void*));
     pCreateIndexBuffer = memory->CreateIndexBuffer;
 
+	pCreateVertexBuffer = malloc(sizeof(void*));
+	pCreateVertexBuffer = memory->CreateVertexBuffer;
+
+    pSetBuffers = malloc(sizeof(void*));
+    pSetBuffers = memory->SetBuffers;
+
+    initSystemManager();
 
     //Add Entity
     unsigned int indices[] = {0, 1, 2};
@@ -32,4 +36,11 @@ void_pGameMemory(Start) {
 
 	CreateRenderingComponent(indices, NELEMS(indices), verticesCombo, NELEMS(verticesCombo));
 
+    
+
+    registerSystem(renderingSystem);
+}
+
+void_pGameMemory(Update) {
+    runSystems();
 }

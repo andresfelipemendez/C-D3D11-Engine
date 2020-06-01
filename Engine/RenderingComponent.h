@@ -6,12 +6,9 @@ typedef struct {
 } SimpleVertexCombined;
 
 typedef struct {
-	void* indexBuffer;
-	void* vertexBuffer;
+	void* pIndexBuffer;
+	void* pVertexBuffer;
 } RenderingComponent;
-
-
-static RenderingComponent* renderingComponentsArr = 0;
 
 unsigned int CreateRenderingComponent(unsigned int* indices, unsigned int indicesLength, 
 									  SimpleVertexCombined* vertices, unsigned int verticesLength);

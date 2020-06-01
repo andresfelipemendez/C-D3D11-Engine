@@ -23,3 +23,6 @@ static ID3D11Buffer* g_pVertexBuffer = NULL;
 ID3D11Buffer* m_matrixBuffer;
 
 void* CreateIndexBuffer(unsigned int * indices, unsigned int size);
+void* CreateVertexBuffer(unsigned int * vertices, unsigned int size);
+
+void SetBuffers(void* indexBuffer, void* vertexBuffer);
