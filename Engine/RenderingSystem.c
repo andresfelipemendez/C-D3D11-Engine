@@ -1,7 +1,20 @@
 #include "RenderingSystem.h"
+#include "RenderingComponent.h"
+#include "engine.h"
 
-void renderingSystem()
+extern unsigned int * pNumRenderingComponents;
+extern RenderingComponent* pRenderingComponents;
+
+void renderingSystem(void)
 {
-	//query all rendering components?
-	
+	RenderingComponent* p = pRenderingComponents; 
+	for (int i = 0; i < *pNumRenderingComponents; i++)
+	{
+		RenderingComponent rc = (*p);
+		void* indexBuffer = rc.pIndexBuffer;
+		void* vertexBuffer = rc.pVertexBuffer;
+		setBuffers(indexBuffer, vertexBuffer);
+		p++;
+
+	}
 }
