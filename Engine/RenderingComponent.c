@@ -11,6 +11,7 @@ unsigned int CreateRenderingComponent(
 	unsigned int* indices, unsigned int indicesLength, 
 	SimpleVertexCombined* vertices, unsigned int verticesLength)
 {
+	renderingComponents[nrcs].numIndices = indicesLength;
 	renderingComponents[nrcs].pIndexBuffer = createIndexBuffer(indices, indicesLength);
 	renderingComponents[nrcs].pVertexBuffer = createVertexBuffer(vertices, verticesLength);
 	nrcs++;

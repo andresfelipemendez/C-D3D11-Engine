@@ -21,7 +21,7 @@ typedef pVoid_pUIntUint(create_index_buffer);
 #define pVoid_pVertexUint(name) void* name(unsigned int *SimpleVertexCombined, unsigned int size)
 typedef pVoid_pVertexUint(create_vertex_buffer);
 
-#define pVoid_pVoidpVoid(name) void* name(void *indexBuffer, void* vertexBuffer)
+#define pVoid_pVoidpVoid(name) void* name(unsigned int numIndices,void *indexBuffer, void* vertexBuffer)
 typedef pVoid_pVoidpVoid(set_buffers);
 
 #define void_pChar(name) void name(char *message)
@@ -40,7 +40,7 @@ typedef void* (*CreateVertexBuffer_f)(SimpleVertexCombined*, unsigned int);
 #define createVertexBuffer ((CreateVertexBuffer_f) pCreateVertexBuffer)
 
 void* pSetBuffers;
-typedef void* (*SetBuffers_f)(void*,void*);
+typedef void* (*SetBuffers_f)(unsigned int,void*,void* );
 #define setBuffers ((SetBuffers_f) pSetBuffers)
 
 //void SetBuffers(void* indexBuffer, void* vertexBuffer);

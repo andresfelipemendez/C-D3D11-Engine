@@ -421,8 +421,9 @@ WinMain(HINSTANCE Instance,
 			}
 		}
 
-		float color[4] = {0.22f, 0.5f, 0.5f, 255};
+		float color[4] = {0.0f, 0.0f, 0.0f, 255};
 		d3dctx->lpVtbl->ClearRenderTargetView(d3dctx, view, color);
+
 
 		result = d3dctx->lpVtbl->Map(d3dctx, m_matrixBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource);
 		dataPtr = (MatrixBufferType *)mappedResource.pData;
