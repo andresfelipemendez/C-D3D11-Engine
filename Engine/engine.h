@@ -43,9 +43,6 @@ void* pSetBuffers;
 typedef void* (*SetBuffers_f)(unsigned int,void*,void* );
 #define setBuffers ((SetBuffers_f) pSetBuffers)
 
-//void SetBuffers(void* indexBuffer, void* vertexBuffer);
-
-
 typedef struct {
     create_index_buffer *CreateIndexBuffer;
     create_vertex_buffer *CreateVertexBuffer;

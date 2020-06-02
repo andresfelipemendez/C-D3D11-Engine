@@ -26,8 +26,8 @@ void_pGameMemory(Start) {
 
     initSystemManager();
 
+    //traslation t1 = {0};
     unsigned int indices[] = {3, 1, 0, 0, 1, 2};
-
 	SimpleVertexCombined verticesCombo[] = {
 		{{-1.0f,  1.0f, 0.0f}, {1.0f, 1.0f, 1.0f}},
 		{{-0.9f, -1.0f, 0.0f}, {1.0f, 1.0f, 1.0f}},
@@ -37,9 +37,8 @@ void_pGameMemory(Start) {
 
 	CreateRenderingComponent(indices, NELEMS(indices), verticesCombo, NELEMS(verticesCombo));
 
-	
+    //traslation t2 = {0};
     unsigned int indices2[] = {1, 3, 0, 1, 0, 2};
-
 	SimpleVertexCombined verticesCombo2[] = {
 		{{1.0f,  1.0f, 0.0f}, {1.0f, 1.0f, 1.0f}},
 		{{0.9f, -1.0f, 0.0f}, {1.0f, 1.0f, 1.0f}},

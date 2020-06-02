@@ -153,16 +153,22 @@
   <ItemGroup>
     <ClInclude Include="engine.h" />
     <ClInclude Include="entityManager.h" />
+    <ClInclude Include="InputComponent.h" />
+    <ClInclude Include="InputSystem.h" />
     <ClInclude Include="RenderingComponent.h" />
     <ClInclude Include="RenderingSystem.h" />
     <ClInclude Include="systemsManager.h" />
+    <ClInclude Include="TraslationComponent.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="engine.c" />
     <ClCompile Include="entityManager.c" />
+    <ClCompile Include="InputComponent.c" />
+    <ClCompile Include="InputSystem.c" />
     <ClCompile Include="RenderingComponent.c" />
     <ClCompile Include="RenderingSystem.c" />
     <ClCompile Include="systemsManager.c" />
+    <ClCompile Include="TraslationComponent.c" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
