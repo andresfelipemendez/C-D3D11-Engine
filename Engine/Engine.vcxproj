@@ -152,7 +152,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="engine.h" />
-    <ClInclude Include="entityManager.h" />
+    <ClInclude Include="EntityManager.h" />
     <ClInclude Include="InputComponent.h" />
     <ClInclude Include="InputSystem.h" />
     <ClInclude Include="RenderingComponent.h" />
@@ -162,7 +162,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="engine.c" />
-    <ClCompile Include="entityManager.c" />
+    <ClCompile Include="EntityManager.c" />
     <ClCompile Include="InputComponent.c" />
     <ClCompile Include="InputSystem.c" />
     <ClCompile Include="RenderingComponent.c" />

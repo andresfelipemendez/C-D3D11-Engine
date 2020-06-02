@@ -6,13 +6,12 @@
 
 // SOA or AOS? this is a SOA but I'm not sure if it is what the DOD dictates
 typedef struct {
-	int* entityId;
 	RenderingComponent* renderingComponents;
 	TraslationComponent* traslationComponents;
 	InputComponent* inputComponents;
 } ArchetypeRendererTraslationInput;
 
-ArchetypeRendererTraslationInput* archetypeRendererTraslationInput = 0;
+ArchetypeRendererTraslationInput* archetypeRendererTraslationInput;
 
-void* createEntityArchetiypeRendererTraslationInput();
+unsigned int createEntityArchetiypeRendererTraslationInput();
 

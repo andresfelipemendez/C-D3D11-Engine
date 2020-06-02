@@ -1,14 +1,13 @@
 #include "RenderingSystem.h"
-#include "RenderingComponent.h"
+#include "EntityManager.h"
 #include "engine.h"
 
-extern unsigned int * pNumRenderingComponents;
-extern RenderingComponent* pRenderingComponents;
+extern unsigned int* pNumEntitiesentitiesARTI;
 
 void renderingSystem(void)
 {
-	RenderingComponent* p = pRenderingComponents; 
-	unsigned int numRenderingComponents = *pNumRenderingComponents;
+	RenderingComponent* p = archetypeRendererTraslationInput->renderingComponents; 
+	unsigned int numRenderingComponents = *pNumEntitiesentitiesARTI;
 	for (int i = 0; i < numRenderingComponents; i++)
 	{
 		RenderingComponent rc = (*p);

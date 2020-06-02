@@ -421,8 +421,6 @@ WinMain(HINSTANCE Instance,
 			}
 		}
 
-		//createEntity()
-
 		float color[4] = {0.0f, 0.0f, 0.0f, 255};
 		d3dctx->lpVtbl->ClearRenderTargetView(d3dctx, view, color);
 
