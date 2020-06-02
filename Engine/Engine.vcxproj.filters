@@ -30,6 +30,15 @@
     <ClInclude Include="systemsManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="TraslationComponent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="InputSystem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="InputComponent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="engine.c">
@@ -45,6 +54,15 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="systemsManager.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TraslationComponent.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="InputSystem.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="InputComponent.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
