@@ -37,10 +37,14 @@ void_pGameMemory(Start) {
     unsigned int indices[] = {3, 1, 0, 0, 1, 2};
     archetypeRendererTraslationInput->renderingComponents[entity].pIndexBuffer = createIndexBuffer(indices, NELEMS(indices));
 	SimpleVertexCombined vertices[] = {
+        {{-1.0f,  1.0f, 0.0f}, {1.0f, 1.0f, 1.0f}},
+        {{-0.9f,  1.0f, 0.0f}, {1.0f, 1.0f, 1.0f}},
+        {{-0.9f, -1.0f, 0.0f}, {1.0f, 1.0f, 1.0f}},
+
 		{{-1.0f,  1.0f, 0.0f}, {1.0f, 1.0f, 1.0f}},
 		{{-0.9f, -1.0f, 0.0f}, {1.0f, 1.0f, 1.0f}},
-		{{-1.0f, -1.0f, 0.0f}, {1.0f, 1.0f, 1.0f}},
-		{{-0.9f,  1.0f, 0.0f}, {1.0f, 1.0f, 1.0f}}};
+		{{-1.0f, -1.0f, 0.0f}, {1.0f, 1.0f, 1.0f}}
+    };
     archetypeRendererTraslationInput->renderingComponents[entity].pVertexBuffer = createVertexBuffer(vertices, NELEMS(vertices));
     
 
@@ -53,10 +57,16 @@ void_pGameMemory(Start) {
     unsigned int indices2[] = {1, 3, 0, 1, 0, 2};
     archetypeRendererTraslationInput->renderingComponents[entity2].pIndexBuffer = createIndexBuffer(indices2, NELEMS(indices2));
 	SimpleVertexCombined vertices2[] = {
-		{{1.0f,  1.0f, 0.0f}, {1.0f, 1.0f, 1.0f}},
+        {{0.9f,  1.0f, 0.0f}, {1.0f, 1.0f, 1.0f}},
+        {{1.0f,  1.0f, 0.0f}, {1.0f, 1.0f, 1.0f}},
 		{{0.9f, -1.0f, 0.0f}, {1.0f, 1.0f, 1.0f}},
-		{{1.0f, -1.0f, 0.0f}, {1.0f, 1.0f, 1.0f}},
-		{{0.9f,  1.0f, 0.0f}, {1.0f, 1.0f, 1.0f}}};
+
+        {{0.9f, -1.0f, 0.0f}, {1.0f, 1.0f, 1.0f}},
+		{{1.0f,  1.0f, 0.0f}, {1.0f, 1.0f, 1.0f}},
+		{{1.0f, -1.0f, 0.0f}, {1.0f, 1.0f, 1.0f}}
+
+		
+    };
 	archetypeRendererTraslationInput->renderingComponents[entity2].pVertexBuffer = createVertexBuffer(vertices2, NELEMS(vertices2));
 
     

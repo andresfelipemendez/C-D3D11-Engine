@@ -58,5 +58,6 @@ void SetBuffers(unsigned int numIndices, void* indexBuffer, void* vertexBuffer) 
 	d3dctx->lpVtbl->IASetVertexBuffers(d3dctx, 0, 1, &vertexBuffer, &str, &off);
 	d3dctx->lpVtbl->IASetPrimitiveTopology(d3dctx, D3D10_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
-	d3dctx->lpVtbl->DrawIndexed(d3dctx, numIndices, 0, 0);
+	d3dctx->lpVtbl->Draw(d3dctx, 6, 0);
+	//d3dctx->lpVtbl->DrawIndexed(d3dctx, numIndices, 0, 0);
 }
