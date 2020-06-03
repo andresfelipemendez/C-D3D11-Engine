@@ -4,6 +4,7 @@
 #define DllExport __declspec(dllexport)
 #define PI (3.14159265358979323846)
 
+
 //#define SYSTEM(systemName) registerSystem(systemName) void systemName(void);
 
 #define NELEMS(x)  (sizeof(x) / sizeof((x)[0]))

@@ -7,7 +7,6 @@ unsigned int* pNumEntitiesentitiesARTI = &numentitiesARTI;
 void InitEntityManager() {
 	archetypeRendererTraslationInput = malloc(sizeof(void*));
 	archetypeRendererTraslationInput->renderingComponents = malloc(sizeof(RenderingComponent) * 512);
-	// memset(archetypeRendererTraslationInput->renderingComponents,0,512); ?? should i use sizeof here?
 	archetypeRendererTraslationInput->traslationComponents = malloc(sizeof(TraslationComponent) * 512);
 	archetypeRendererTraslationInput->inputComponents = malloc(sizeof(InputComponent) * 512);
 }

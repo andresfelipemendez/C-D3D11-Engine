@@ -1,7 +1,7 @@
 #include "systemsManager.h"
 #include "RenderingComponent.h"
 
-void initSystemManager() {
+void InitSystemManager() {
 	/**numRenderingComponents = (unsigned int*) malloc(sizeof(unsigned int));
 	**numRenderingComponents = 1;*/
 

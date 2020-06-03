@@ -438,6 +438,8 @@ WinMain(HINSTANCE Instance,
 		engineMethods.Update(&gameMemory);
 
 		HRESULT res = sc->lpVtbl->Present(sc, 0, 0);
+
+		Sleep(33.3f);
 	}
 
 	sc->lpVtbl->SetFullscreenState(sc, FALSE, NULL);
