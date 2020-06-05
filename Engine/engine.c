@@ -40,7 +40,7 @@ void_pGameMemory(Start)
 	t1.x = 0;
 	t1.y = 1;
 	t1.z = -5.15;
-	archetypeRendererTraslationInput->traslationComponents[entity] = t1;
+	archetypeRendererTraslationInput->translations[entity] = t1;
 	unsigned int indices[] = {3, 1, 0, 0, 1, 2};
 	archetypeRendererTraslationInput->renderingComponents[entity].pIndexBuffer = createIndexBuffer(indices, NELEMS(indices));
 	SimpleVertexCombined vertices[] = {
@@ -59,7 +59,7 @@ void_pGameMemory(Start)
 	t2.x = 0;
 	t2.y = -1;
 	t2.z = -5.15;
-	archetypeRendererTraslationInput->traslationComponents[entity2] = t2;
+	archetypeRendererTraslationInput->translations[entity2] = t2;
 
 	unsigned int indices2[] = {1, 3, 0, 1, 0, 2};
 	archetypeRendererTraslationInput->renderingComponents[entity2].pIndexBuffer = createIndexBuffer(indices2, NELEMS(indices2));
