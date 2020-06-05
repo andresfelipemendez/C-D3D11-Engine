@@ -101,10 +101,14 @@ Win32MainWindowCallback(HWND Window,
 		return 0;
 	}
 	break;
-	case WM_SYSKEYDOWN:
 	case WM_SYSKEYUP:
-	case WM_KEYDOWN:
 	case WM_KEYUP:
+	{
+		input = 0;
+		break;
+	}
+	case WM_SYSKEYDOWN:
+	case WM_KEYDOWN:
 	{
 		input = 0;
 		uint32_t VKCode = WParam;

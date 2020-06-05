@@ -7,7 +7,7 @@ unsigned int* pNumEntitiesentitiesARTI = &numentitiesARTI;
 void InitEntityManager() {
 	archetypeRendererTraslationInput = malloc(sizeof(void*));
 	archetypeRendererTraslationInput->renderingComponents = malloc(sizeof(RenderingComponent) * 512);
-	archetypeRendererTraslationInput->traslationComponents = malloc(sizeof(TraslationComponent) * 512);
+	archetypeRendererTraslationInput->translations = malloc(sizeof(TraslationComponent) * 512);
 	archetypeRendererTraslationInput->inputComponents = malloc(sizeof(InputComponent) * 512);
 }
 

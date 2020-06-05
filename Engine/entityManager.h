@@ -4,10 +4,9 @@
 #include "TraslationComponent.h"
 #include "InputComponent.h"
 
-// SOA or AOS? this is a SOA but I'm not sure if it is what the DOD dictates
 typedef struct {
 	RenderingComponent* renderingComponents;
-	TraslationComponent* traslationComponents;
+	TraslationComponent* translations;
 	InputComponent* inputComponents;
 } ArchetypeRendererTraslationInput;
 

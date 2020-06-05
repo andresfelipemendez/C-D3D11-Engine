@@ -5,34 +5,33 @@
 
 extern unsigned int* pNumEntitiesentitiesARTI;
 
+// i need to get the delta time!
 void input_system()
 {
 	InputComponent ic = GetInput();
 	InputComponent* p = archetypeRendererTraslationInput->inputComponents;
-	TraslationComponent* t = archetypeRendererTraslationInput->traslationComponents;
+	TraslationComponent* t = archetypeRendererTraslationInput->translations;
 
-	// i need to get the delta time!
-	
 	unsigned int numRenderingComponents = *pNumEntitiesentitiesARTI;
 
-	if(ic.keyboard != 0) {
+	if ((ic.keyboard & 8)) {
+		t->y -= 0.01f;
 	}
 
-	for (int i = 0; i < numRenderingComponents; i++)
-	{
-		InputComponent rc = (*p);
-		TraslationComponent tc = (*t);
+	if ((ic.keyboard & 4)) {
+		t->y += 0.01f;
+	}
 
-		if ((ic.keyboard & 8)) {
-			t->y += 0.01f;
-		}
+	p++;
+	t++;
+	
+	if ((ic.keyboard & 2)) {
+		t->y -= 0.01f;
+	}
 
-		if ((ic.keyboard & 4)) {
-			t->y -= 0.01f;
-		}
-
-		p++;
-		t++;
+	if ((ic.keyboard & 1)) {
+		t->y += 0.01f;
 	}
 
 }
+									       
