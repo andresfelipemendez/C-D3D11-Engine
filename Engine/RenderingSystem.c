@@ -7,11 +7,19 @@ extern unsigned int* pNumEntitiesentitiesARTI;
 void renderingSystem(void)
 {
 	RenderingComponent* p = archetypeRendererTraslationInput->renderingComponents; 
+	TraslationComponent* t = archetypeRendererTraslationInput->traslationComponents; 
+
 	unsigned int numRenderingComponents = *pNumEntitiesentitiesARTI;
 	for (int i = 0; i < numRenderingComponents; i++)
 	{
 		RenderingComponent rc = (*p);
-		setBuffers(rc.numIndices, rc.pIndexBuffer, rc.pVertexBuffer);
+		TraslationComponent tc = (*t);
+		vector3 pos = {0};
+		pos.x = tc.x;
+		pos.y = tc.y;
+		pos.z = tc.z;
+		setBuffers(pos, rc.numIndices, rc.pIndexBuffer, rc.pVertexBuffer);
 		p++;
+		t++;
 	}
 }

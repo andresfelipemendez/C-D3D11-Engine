@@ -1,5 +1,6 @@
 #pragma once
 #include "RenderingComponent.h"
+#include "InputComponent.h"
 
 #define DllExport __declspec(dllexport)
 #define PI (3.14159265358979323846)
@@ -25,6 +26,11 @@ typedef pVoid_pVertexUint(create_vertex_buffer);
 #define pVoid_pVoidpVoid(name) void* name(unsigned int numIndices,void *indexBuffer, void* vertexBuffer)
 typedef pVoid_pVoidpVoid(set_buffers);
 
+#define InputComponent_Void(name) InputComponent name()
+typedef InputComponent_Void(get_input);
+
+
+
 #define void_pChar(name) void name(char *message)
 typedef void_pChar(print);
 
@@ -41,14 +47,20 @@ typedef void* (*CreateVertexBuffer_f)(SimpleVertexCombined*, unsigned int);
 #define createVertexBuffer ((CreateVertexBuffer_f) pCreateVertexBuffer)
 
 void* pSetBuffers;
-typedef void* (*SetBuffers_f)(unsigned int,void*,void* );
+typedef void* (*SetBuffers_f)(vector3,unsigned int,void*,void* );
 #define setBuffers ((SetBuffers_f) pSetBuffers)
 
+void* pGetInput;
+typedef InputComponent (*pGetInput_f)();
+#define GetInput ((pGetInput_f) pGetInput)
+
+
 typedef struct {
-    create_index_buffer *CreateIndexBuffer;
-    create_vertex_buffer *CreateVertexBuffer;
-    set_buffers *SetBuffers;
-    print *Print;
+        create_index_buffer *CreateIndexBuffer;
+        create_vertex_buffer *CreateVertexBuffer;
+        set_buffers *SetBuffers;
+        get_input* getInput;
+        print *Print;
 } GameMemory;
 
 #define void_pGameMemory(name) DllExport void name(GameMemory* memory)

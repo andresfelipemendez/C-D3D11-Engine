@@ -9,12 +9,11 @@
 
 #include "../Engine/engine.h"
 
-typedef struct
-{
-    D3DXMATRIX world;
-    D3DXMATRIX view;
-    D3DXMATRIX projection;
-} MatrixBufferType;
+//   1000
+//p1 ud00
+//p2 00up
+//   0000
+int input = 0;
 
 typedef struct
 {
@@ -27,6 +26,12 @@ typedef struct
 //todo: this should come from the engine
 const int SCREEN_WIDTH = 800;
 const int SCREEN_HEIGHT = 600;
+
+InputComponent Win32GetInput() {
+	InputComponent ic = { 0 };
+	ic.keyboard = input;
+	return ic;
+}
 
 void checkres(HRESULT hr)
 {
@@ -101,16 +106,19 @@ Win32MainWindowCallback(HWND Window,
 	case WM_KEYDOWN:
 	case WM_KEYUP:
 	{
+		input = 0;
 		uint32_t VKCode = WParam;
 		bool wasdown = ((LParam & (1 << 30)) != 0);
 		bool isdown = ((LParam & (1 << 31)) == 0);
 		switch (VKCode)
 		{
 		case 'W':
+			input |= 1<< 3; // 1000
 			break;
 		case 'A':
 			break;
 		case 'S':
+			input |= 1 << 2; // 0100
 			break;
 		case 'D':
 			break;
@@ -119,10 +127,12 @@ Win32MainWindowCallback(HWND Window,
 		case 'E':
 			break;
 		case VK_UP:
+			input |= 1 << 1; // 0010
 			break;
 		case VK_LEFT:
 			break;
 		case VK_DOWN:
+			input |= 1; // =0001
 			break;
 		case VK_RIGHT:
 			break;
@@ -137,6 +147,7 @@ Win32MainWindowCallback(HWND Window,
 	}
 	break;
 	}
+	// todo if I close the window manually its failing here?
 	return DefWindowProc(Window, Message, WParam, LParam);
 }
 
@@ -147,8 +158,8 @@ inline FILETIME Win32GetLastWriteTime(char *Filename)
     HANDLE FindHandle = FindFirstFile(Filename, &FindData);
     if(FindHandle != INVALID_HANDLE_VALUE)
     {
-        lastWriteTime = FindData.ftLastWriteTime;
-        FindClose(FindHandle);
+	lastWriteTime = FindData.ftLastWriteTime;
+	FindClose(FindHandle);
     }
     return (lastWriteTime);
 }
@@ -160,21 +171,21 @@ void ErrorExit(LPTSTR lpszFunction)
     DWORD dw = GetLastError(); 
 
     FormatMessage(
-        FORMAT_MESSAGE_ALLOCATE_BUFFER | 
-        FORMAT_MESSAGE_FROM_SYSTEM |
-        FORMAT_MESSAGE_IGNORE_INSERTS,
-        NULL,
-        dw,
-        MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT),
-        (LPTSTR) &lpMsgBuf,
-        0, NULL );
+	FORMAT_MESSAGE_ALLOCATE_BUFFER | 
+	FORMAT_MESSAGE_FROM_SYSTEM |
+	FORMAT_MESSAGE_IGNORE_INSERTS,
+	NULL,
+	dw,
+	MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT),
+	(LPTSTR) &lpMsgBuf,
+	0, NULL );
 
     lpDisplayBuf = (LPVOID)LocalAlloc(LMEM_ZEROINIT, 
-        (lstrlen((LPCTSTR)lpMsgBuf) + lstrlen((LPCTSTR)lpszFunction) + 40) * sizeof(TCHAR)); 
+	(lstrlen((LPCTSTR)lpMsgBuf) + lstrlen((LPCTSTR)lpszFunction) + 40) * sizeof(TCHAR)); 
     StringCchPrintf((LPTSTR)lpDisplayBuf, 
-        LocalSize(lpDisplayBuf) / sizeof(TCHAR),
-        TEXT("%s failed with error %d: %s"), 
-        lpszFunction, dw, lpMsgBuf); 
+	LocalSize(lpDisplayBuf) / sizeof(TCHAR),
+	TEXT("%s failed with error %d: %s"), 
+	lpszFunction, dw, lpMsgBuf); 
     MessageBox(NULL, (LPCTSTR)lpDisplayBuf, TEXT("Error"), MB_OK); 
 
     LocalFree(lpMsgBuf);
@@ -191,7 +202,7 @@ static win32_engine_code Wind32LoadGame(void)
 
     engineMethods.DLLLastWriteTime = Win32GetLastWriteTime(SourceDLLName);
     if(CopyFile(SourceDLLName, TempDLLName, false)) {
-        OutputDebugStringA("success copy engine_temp dll\n");
+	OutputDebugStringA("success copy engine_temp dll\n");
 	} else {
 		ErrorExit(TEXT("CopyFile"));
 	}
@@ -199,7 +210,7 @@ static win32_engine_code Wind32LoadGame(void)
     engineMethods.gameCodeDLL = LoadLibrary(TempDLLName);
     if (engineMethods.gameCodeDLL)
     {
-        engineMethods.Start = (start *)GetProcAddress(engineMethods.gameCodeDLL, "Start");
+	engineMethods.Start = (start *)GetProcAddress(engineMethods.gameCodeDLL, "Start");
 		engineMethods.Update = (update *)GetProcAddress(engineMethods.gameCodeDLL, "Update");
     } else {
 		ErrorExit(TEXT("load engine lib"));
@@ -343,68 +354,17 @@ WinMain(HINSTANCE Instance,
 
 	ShowWindow(WindowHandle, ShowCode);
 
-	vector3 up, position, lookAt;
-	vector3 rot;
-
-	up.x = 0.0;
-	up.y = 1.0;
-	up.z = 0.0;
-
-	position.x = 0;
-	position.y = 0;
-	position.z = -5.15;
-
-	lookAt.x = 0.0f;
-	lookAt.y = 0.0f;
-	lookAt.z = 1.0f;
-
-	rot.x = 0; //yaw
-	rot.y = 0; //pitch
-	rot.z = 0; //roll
-
-	D3DMATRIX viewMatrix, projectionMatrix, worldMatrix;
-	D3DMATRIX rotationMatrix;
-
-	D3DXMatrixRotationYawPitchRoll(&rotationMatrix, rot.x, rot.y, rot.z);
-
-	D3DXVec3TransformCoord(&lookAt, &lookAt, &rotationMatrix);
-	D3DXVec3TransformCoord(&up, &up, &rotationMatrix);
-
-	lookAt = add(position, lookAt);
-
-	D3DXMatrixLookAtLH(&viewMatrix, &position, &lookAt, &up);
-
-	float fieldOfView = (float)PI / 4.0f;
-	float screenAspect = (float)SCREEN_WIDTH / (float)SCREEN_HEIGHT;
-	D3DXMatrixPerspectiveFovLH(&projectionMatrix, fieldOfView, screenAspect, 0.03f, 100.0f);
-
-	D3DXMatrixIdentity(&worldMatrix);
-
-	D3D11_BUFFER_DESC matrixBufferDesc;
-	matrixBufferDesc.Usage = D3D11_USAGE_DYNAMIC;
-	matrixBufferDesc.ByteWidth = sizeof(MatrixBufferType);
-	matrixBufferDesc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
-	matrixBufferDesc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
-	matrixBufferDesc.MiscFlags = 0;
-	matrixBufferDesc.StructureByteStride = 0;
-	HRESULT result = d3ddev->lpVtbl->CreateBuffer(d3ddev, &matrixBufferDesc, NULL, &m_matrixBuffer);
-
-	D3D11_MAPPED_SUBRESOURCE mappedResource;
-	MatrixBufferType *dataPtr;
-	unsigned int bufferNumber;
-
-	D3DXMatrixTranspose(&worldMatrix, &worldMatrix);
-	D3DXMatrixTranspose(&viewMatrix, &viewMatrix);
-	D3DXMatrixTranspose(&projectionMatrix, &projectionMatrix);
+	InitMatrixTransform();
 
 	GameMemory gameMemory = {0};
 	gameMemory.Print = Win32Print;
 	gameMemory.CreateIndexBuffer = CreateIndexBuffer;
 	gameMemory.CreateVertexBuffer = CreateVertexBuffer;
 	gameMemory.SetBuffers = SetBuffers;
+	gameMemory.getInput = Win32GetInput;
 
 	win32_engine_code engineMethods = {0};
-    engineMethods = Wind32LoadGame();
+	engineMethods = Wind32LoadGame();
 
 	engineMethods.Start(&gameMemory);
 
@@ -424,22 +384,11 @@ WinMain(HINSTANCE Instance,
 		float color[4] = {0.0f, 0.0f, 0.0f, 255};
 		d3dctx->lpVtbl->ClearRenderTargetView(d3dctx, view, color);
 
-		result = d3dctx->lpVtbl->Map(d3dctx, m_matrixBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource);
-		dataPtr = (MatrixBufferType *)mappedResource.pData;
-
-		dataPtr->world = worldMatrix;
-		dataPtr->view = viewMatrix;
-		dataPtr->projection = projectionMatrix;
-
-		d3dctx->lpVtbl->Unmap(d3dctx, m_matrixBuffer, 0);
-		bufferNumber = 0;
-		d3dctx->lpVtbl->VSSetConstantBuffers(d3dctx, bufferNumber, 1, &m_matrixBuffer);
-
 		engineMethods.Update(&gameMemory);
 
 		HRESULT res = sc->lpVtbl->Present(sc, 0, 0);
 
-		Sleep(33.3f);
+		Sleep(1);
 	}
 
 	sc->lpVtbl->SetFullscreenState(sc, FALSE, NULL);

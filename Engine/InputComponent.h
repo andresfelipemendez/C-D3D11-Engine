@@ -1,4 +1,6 @@
 #pragma once
 typedef struct {
-	int iD;
+	int playerNumber;
+	int keyboard;
 } InputComponent;
+
