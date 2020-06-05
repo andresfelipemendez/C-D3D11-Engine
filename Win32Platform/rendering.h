@@ -5,6 +5,14 @@
 #include <D3DX11async.h>
 #include <D3DX10math.h>
 
+#include "../Engine/engine.h"
+
+typedef struct
+{
+    D3DXMATRIX world;
+    D3DXMATRIX view;
+    D3DXMATRIX projection;
+} MatrixBufferType;
 
 ID3D11Device* d3ddev;
 ID3D11DeviceContext* d3dctx;
@@ -22,7 +30,19 @@ static ID3D11Buffer* g_pVertexBuffer = NULL;
 
 ID3D11Buffer* m_matrixBuffer;
 
-void* CreateIndexBuffer(unsigned int * indices, unsigned int size);
-void* CreateVertexBuffer(unsigned int * vertices, unsigned int size);
+D3D11_MAPPED_SUBRESOURCE mappedResource;
+MatrixBufferType *dataPtr;
 
-void SetBuffers(void* indexBuffer, void* vertexBuffer);
+D3DMATRIX viewMatrix, projectionMatrix, worldMatrix;
+D3DMATRIX rotationMatrix;
+
+unsigned int bufferNumber;
+
+void InitMatrixTransform();
+
+void* CreateIndexBuffer(unsigned int * indices, unsigned int size);
+void* CreateVertexBuffer(SimpleVertexCombined* vertices, unsigned int size);
+
+void CalculateMatrix(vector3 position);
+
+void SetBuffers(vector3 pos, unsigned int numIndices, void* indexBuffer, void* vertexBuffer);
