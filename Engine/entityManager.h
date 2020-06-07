@@ -1,8 +1,8 @@
 #pragma once
 
-#include "RenderingComponent.h"
-#include "TraslationComponent.h"
-#include "InputComponent.h"
+#include "Components/RenderingComponent.h"
+#include "Components/TraslationComponent.h"
+#include "Components/InputComponent.h"
 
 typedef struct {
 	RenderingComponent* renderingComponents;
@@ -12,5 +12,10 @@ typedef struct {
 
 ArchetypeRendererTraslationInput* archetypeRendererTraslationInput;
 
-//unsigned int createEntityArchetiypeRendererTraslationInput();
+typedef struct {
+	RenderingComponent* renderingComponents;
+	TraslationComponent* translations;
+	//BounceComponent* bounceComponents;
+} ArchetypeRendererTraslationBounce;
 
+ArchetypeRendererTraslationInput* archetypeRendererTraslationInput;

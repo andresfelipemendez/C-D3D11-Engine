@@ -1,9 +1,9 @@
 #include "InputSystem.h"
-#include "engine.h"
-#include "InputComponent.h"
-#include "EntityManager.h"
+#include "../engine.h"
+#include "../Components/InputComponent.h"
+#include "../EntityManager.h"
 
-extern unsigned int* pNumEntitiesentitiesARTI;
+extern unsigned int* pNumEntitiesARTI;
 
 // i need to get the delta time!
 void input_system()
@@ -12,7 +12,7 @@ void input_system()
 	InputComponent* p = archetypeRendererTraslationInput->inputComponents;
 	TraslationComponent* t = archetypeRendererTraslationInput->translations;
 
-	unsigned int numRenderingComponents = *pNumEntitiesentitiesARTI;
+	unsigned int numRenderingComponents = *pNumEntitiesARTI;
 
 	if ((ic.keyboard & 8)) {
 		t->y -= 0.01f;

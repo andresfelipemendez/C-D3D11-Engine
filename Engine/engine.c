@@ -1,7 +1,7 @@
 #include "engine.h"
 #include "EntityManager.h"
-#include "RenderingSystem.h"
-#include "InputSystem.h"
+#include "Systems/RenderingSystem.h"
+#include "Systems/InputSystem.h"
 
 
 vector3 add(vector3 a, vector3 b)
