@@ -10,6 +10,3 @@ typedef struct {
 	void* pIndexBuffer;
 	void* pVertexBuffer;
 } RenderingComponent;
-
-unsigned int CreateRenderingComponent(unsigned int* indices, unsigned int indicesLength, 
-									  SimpleVertexCombined* vertices, unsigned int verticesLength);

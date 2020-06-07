@@ -1,0 +1,23 @@
+
+C:\Users\felipe\source\repos\Engine\Win32Platform>(
+cd Debug  
+ for %a in (*.c) do echo Debugfa  
+ call :treeProcess  
+ cd .. 
+) 
+
+C:\Users\felipe\source\repos\Engine\Win32Platform\Debug>rem Do whatever you want here over the files of this subdir, for example: 
+
+C:\Users\felipe\source\repos\Engine\Win32Platform\Debug>REM for %f in (*.c) do echo %~dpf 
+
+C:\Users\felipe\source\repos\Engine\Win32Platform\Debug>(for / %d in (*) do (
+cd %d  
+ for %a in (*.c) do echo %~dfa  
+ call :treeProcess  
+ cd .. 
+) ) 1>echolist 
+
+C:\Users\felipe\source\repos\Engine\Win32Platform\Debug>echo  
+ECHO is on.
+
+C:\Users\felipe\source\repos\Engine\Win32Platform\Debug>exit /b 

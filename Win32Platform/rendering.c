@@ -121,7 +121,7 @@ void SetBuffers(vector3 pos, unsigned int numIndices, void* indexBuffer, void* v
 
 	unsigned int off = 0;
 	unsigned int str = sizeof(SimpleVertexCombined);
-	d3dctx->lpVtbl->IASetIndexBuffer(d3dctx, indexBuffer, DXGI_FORMAT_R32_UINT, 0);
+	//d3dctx->lpVtbl->IASetIndexBuffer(d3dctx, indexBuffer, DXGI_FORMAT_R32_UINT, 0); // drawing triangle list
 	d3dctx->lpVtbl->IASetVertexBuffers(d3dctx, 0, 1, &vertexBuffer, &str, &off);
 	d3dctx->lpVtbl->IASetPrimitiveTopology(d3dctx, D3D10_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
