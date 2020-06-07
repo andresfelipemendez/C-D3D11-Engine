@@ -5,9 +5,6 @@
 #define DllExport __declspec(dllexport)
 #define PI (3.14159265358979323846)
 
-
-//#define SYSTEM(systemName) registerSystem(systemName) void systemName(void);
-
 #define NELEMS(x)  (sizeof(x) / sizeof((x)[0]))
 typedef unsigned int size_t;
 
@@ -28,7 +25,6 @@ typedef pVoid_pVoidpVoid(set_buffers);
 
 #define InputComponent_Void(name) InputComponent name()
 typedef InputComponent_Void(get_input);
-
 
 
 #define void_pChar(name) void name(char *message)
@@ -56,6 +52,7 @@ typedef InputComponent (*pGetInput_f)();
 
 
 typedef struct {
+        void* memory;
         create_index_buffer *CreateIndexBuffer;
         create_vertex_buffer *CreateVertexBuffer;
         set_buffers *SetBuffers;
@@ -65,4 +62,5 @@ typedef struct {
 
 #define void_pGameMemory(name) DllExport void name(GameMemory* memory)
 typedef void_pGameMemory(start);
+typedef void_pGameMemory(set_method_pointers);
 typedef void_pGameMemory(update);

@@ -12,5 +12,5 @@ typedef struct {
 
 ArchetypeRendererTraslationInput* archetypeRendererTraslationInput;
 
-unsigned int createEntityArchetiypeRendererTraslationInput();
+//unsigned int createEntityArchetiypeRendererTraslationInput();
 
