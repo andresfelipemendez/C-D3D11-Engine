@@ -6,7 +6,6 @@
 #define PI (3.14159265358979323846)
 
 #define NELEMS(x)  (sizeof(x) / sizeof((x)[0]))
-typedef unsigned int size_t;
 
 typedef struct {
     float x, y ,z;
