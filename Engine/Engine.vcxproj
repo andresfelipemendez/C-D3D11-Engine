@@ -151,6 +151,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Components\BounceComponent.h" />
+    <ClInclude Include="Components\RectangleComponent.h" />
     <ClInclude Include="Engine.h" />
     <ClInclude Include="EntityManager.h" />
     <ClInclude Include="Components\InputComponent.h" />

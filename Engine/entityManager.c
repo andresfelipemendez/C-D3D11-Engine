@@ -5,7 +5,7 @@ static unsigned int numentitiesARTI = 0;
 unsigned int* pNumEntitiesARTI = &numentitiesARTI;
 
 static unsigned int numentitiesARTC = 0;
-unsigned int* pNumEntitiesARTC = &numentitiesARTI;
+unsigned int* pNumEntitiesARTC = &numentitiesARTC;
 
 void InitEntityManager(char* memory) 
 {
