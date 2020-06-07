@@ -1,5 +1,5 @@
 #include "rendering.h"
-#include "../Engine/RenderingComponent.h"
+#include "../Engine/Components/RenderingComponent.h"
 
 
 void InitMatrixTransform() 

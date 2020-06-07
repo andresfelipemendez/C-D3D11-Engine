@@ -151,24 +151,21 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="engine.h" />
+    <ClInclude Include="Engine.h" />
     <ClInclude Include="EntityManager.h" />
-    <ClInclude Include="InputComponent.h" />
-    <ClInclude Include="InputSystem.h" />
-    <ClInclude Include="RenderingComponent.h" />
-    <ClInclude Include="RenderingSystem.h" />
-    <ClInclude Include="systemsManager.h" />
-    <ClInclude Include="TraslationComponent.h" />
+    <ClInclude Include="Components\InputComponent.h" />
+    <ClInclude Include="Systems\InputSystem.h" />
+    <ClInclude Include="Components\RenderingComponent.h" />
+    <ClInclude Include="Systems\RenderingSystem.h" />
+    <ClInclude Include="SystemsManager.h" />
+    <ClInclude Include="Components\TraslationComponent.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="engine.c" />
+    <ClCompile Include="Engine.c" />
     <ClCompile Include="EntityManager.c" />
-    <ClCompile Include="InputComponent.c" />
-    <ClCompile Include="InputSystem.c" />
-    <ClCompile Include="RenderingComponent.c" />
-    <ClCompile Include="RenderingSystem.c" />
-    <ClCompile Include="systemsManager.c" />
-    <ClCompile Include="TraslationComponent.c" />
+    <ClCompile Include="Systems\InputSystem.c" />
+    <ClCompile Include="Systems\RenderingSystem.c" />
+    <ClCompile Include="SystemsManager.c" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

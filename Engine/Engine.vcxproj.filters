@@ -15,54 +15,45 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="engine.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="RenderingSystem.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="RenderingComponent.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="systemsManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="TraslationComponent.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="InputSystem.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="InputComponent.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="EntityManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Systems\InputSystem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\InputComponent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\TraslationComponent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Systems\RenderingSystem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\RenderingComponent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SystemsManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="engine.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="RenderingSystem.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="RenderingComponent.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="systemsManager.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="TraslationComponent.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="InputSystem.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="InputComponent.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="EntityManager.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Systems\InputSystem.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Systems\RenderingSystem.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SystemsManager.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

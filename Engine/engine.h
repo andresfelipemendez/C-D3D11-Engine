@@ -1,6 +1,6 @@
 #pragma once
-#include "RenderingComponent.h"
-#include "InputComponent.h"
+#include "Components/RenderingComponent.h"
+#include "Components/InputComponent.h"
 
 #define DllExport __declspec(dllexport)
 #define PI (3.14159265358979323846)
