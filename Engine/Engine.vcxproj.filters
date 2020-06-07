@@ -39,6 +39,12 @@
     <ClInclude Include="SystemsManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Components\BounceComponent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\RectangleComponent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EntityManager.c">

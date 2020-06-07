@@ -1,10 +1,6 @@
 #include "systemsManager.h"
-//#include "Components/RenderingComponent.h"
 
 void InitSystemManager() {
-	/**numRenderingComponents = (unsigned int*) malloc(sizeof(unsigned int));
-	**numRenderingComponents = 1;*/
-
 	numSystems = 0;
 }
 
@@ -13,6 +9,7 @@ void registerSystem(void* system)
 	if (numSystems >= 512)
 	{
 		// todo fail or resize?
+
 	}
 
 	systems[numSystems] = system;
