@@ -1,23 +1,28 @@
 #include "entityManager.h"
+#include "stdlib.h"
+
 
 static void* entitiesARTI[512];
 static unsigned int numentitiesARTI = 0;
 unsigned int* pNumEntitiesentitiesARTI = &numentitiesARTI;
 
-void InitEntityManager() {
-	archetypeRendererTraslationInput = malloc(sizeof(void*));
-	archetypeRendererTraslationInput->renderingComponents = malloc(sizeof(RenderingComponent) * 512);
-	archetypeRendererTraslationInput->translations = malloc(sizeof(TraslationComponent) * 512);
-	archetypeRendererTraslationInput->inputComponents = malloc(sizeof(InputComponent) * 512);
-}
-
-
-unsigned int createEntityArchetiypeRendererTraslationInput()
+void InitEntityManager(char* memory) 
 {
-	if(numentitiesARTI >= 512) {
-		// todo fail or expand
-		return 0;
-	}
+	archetypeRendererTraslationInput = memory;
 
-	return numentitiesARTI++;
+	archetypeRendererTraslationInput->renderingComponents = NULL;
+	archetypeRendererTraslationInput->translations= NULL;
+	archetypeRendererTraslationInput->inputComponents = NULL;
+
+	archetypeRendererTraslationInput->renderingComponents = 
+		archetypeRendererTraslationInput + 1;
+
+	archetypeRendererTraslationInput->translations = 
+		archetypeRendererTraslationInput->renderingComponents + 3;
+
+	archetypeRendererTraslationInput->inputComponents =
+		archetypeRendererTraslationInput->translations + 3;
+
+	numentitiesARTI = 2;
 }
+

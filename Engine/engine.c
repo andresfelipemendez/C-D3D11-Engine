@@ -3,6 +3,7 @@
 #include "RenderingSystem.h"
 #include "InputSystem.h"
 
+
 vector3 add(vector3 a, vector3 b)
 {
     vector3 r;
@@ -12,37 +13,52 @@ vector3 add(vector3 a, vector3 b)
     return r;
 }
 
-void_pGameMemory(Start) 
+void_pGameMemory(SetMethodPointers)
 {
-	ptr = malloc(sizeof(void*));
+	if (ptr == 0) {
+		ptr = malloc(sizeof(void*));
+	}
 	ptr = memory->Print;
 
-	pCreateIndexBuffer = malloc(sizeof(void*));
+	if (pCreateIndexBuffer == 0) {
+		pCreateIndexBuffer = malloc(sizeof(void*));
+	}
 	pCreateIndexBuffer = memory->CreateIndexBuffer;
 
-	pCreateVertexBuffer = malloc(sizeof(void*));
+	
+	if (pCreateVertexBuffer == 0) {
+		pCreateVertexBuffer = malloc(sizeof(void*));
+	}
 	pCreateVertexBuffer = memory->CreateVertexBuffer;
 
-	pSetBuffers = malloc(sizeof(void*));
+	if (pSetBuffers == 0) {
+		pSetBuffers = malloc(sizeof(void*));
+	}
 	pSetBuffers = memory->SetBuffers;
 
-	pGetInput = malloc(sizeof(void*));
+	if (pGetInput == 0) {
+		pGetInput = malloc(sizeof(void*));
+	}
 	pGetInput = memory->getInput;
 
-	InitEntityManager();
 	InitSystemManager();
-    
+
 	registerSystem(renderingSystem);
 	registerSystem(input_system);
 
-	unsigned int entity = createEntityArchetiypeRendererTraslationInput();
+	InitEntityManager(memory->memory);
+}
+
+void_pGameMemory(Start) 
+{
+
 	TraslationComponent t1 = {0};
 	t1.x = 0;
 	t1.y = 1;
 	t1.z = -5.15;
-	archetypeRendererTraslationInput->translations[entity] = t1;
+	archetypeRendererTraslationInput->translations[0] = t1;
 	unsigned int indices[] = {3, 1, 0, 0, 1, 2};
-	archetypeRendererTraslationInput->renderingComponents[entity].pIndexBuffer = createIndexBuffer(indices, NELEMS(indices));
+	archetypeRendererTraslationInput->renderingComponents[0].pIndexBuffer = createIndexBuffer(indices, NELEMS(indices));
 	SimpleVertexCombined vertices[] = {
 		{{-1.0f,  1.0f, 0.0f}, {1.0f, 1.0f, 1.0f}},
 		{{-0.9f,  1.0f, 0.0f}, {1.0f, 1.0f, 1.0f}},
@@ -52,17 +68,17 @@ void_pGameMemory(Start)
 		{{-0.9f, -1.0f, 0.0f}, {1.0f, 1.0f, 1.0f}},
 		{{-1.0f, -1.0f, 0.0f}, {1.0f, 1.0f, 1.0f}}
 	};
-	archetypeRendererTraslationInput->renderingComponents[entity].pVertexBuffer = createVertexBuffer(vertices, NELEMS(vertices));
+	archetypeRendererTraslationInput->renderingComponents[0].pVertexBuffer = createVertexBuffer(vertices, NELEMS(vertices));
     
-	unsigned int entity2 = createEntityArchetiypeRendererTraslationInput();
+
 	TraslationComponent t2 = {0};
 	t2.x = 0;
 	t2.y = -1;
 	t2.z = -5.15;
-	archetypeRendererTraslationInput->translations[entity2] = t2;
+	archetypeRendererTraslationInput->translations[1] = t2;
 
 	unsigned int indices2[] = {1, 3, 0, 1, 0, 2};
-	archetypeRendererTraslationInput->renderingComponents[entity2].pIndexBuffer = createIndexBuffer(indices2, NELEMS(indices2));
+	archetypeRendererTraslationInput->renderingComponents[1].pIndexBuffer = createIndexBuffer(indices2, NELEMS(indices2));
 	SimpleVertexCombined vertices2[] = {
 		{{0.9f,  1.0f, 0.0f}, {1.0f, 1.0f, 1.0f}},
 		{{1.0f,  1.0f, 0.0f}, {1.0f, 1.0f, 1.0f}},
@@ -72,7 +88,7 @@ void_pGameMemory(Start)
 		{{1.0f,  1.0f, 0.0f}, {1.0f, 1.0f, 1.0f}},
 		{{1.0f, -1.0f, 0.0f}, {1.0f, 1.0f, 1.0f}}
 	};
-	archetypeRendererTraslationInput->renderingComponents[entity2].pVertexBuffer = createVertexBuffer(vertices2, NELEMS(vertices2));
+	archetypeRendererTraslationInput->renderingComponents[1].pVertexBuffer = createVertexBuffer(vertices2, NELEMS(vertices2));
 }
 
 void_pGameMemory(Update) {

@@ -1,4 +1,3 @@
-//#define WIN32_LEAN_AND_MEAN
 #include <windows.h>
 #include <strsafe.h>
 
@@ -9,10 +8,6 @@
 
 #include "../Engine/engine.h"
 
-//   1000
-//p1 ud00
-//p2 00up
-//   0000
 int input = 0;
 
 typedef struct
@@ -21,6 +16,7 @@ typedef struct
     FILETIME DLLLastWriteTime;
     start *Start;
     update *Update;
+    set_method_pointers* SetMethodPointers;
 } win32_engine_code;
 
 //todo: this should come from the engine
@@ -151,7 +147,6 @@ Win32MainWindowCallback(HWND Window,
 	}
 	break;
 	}
-	// todo if I close the window manually its failing here?
 	return DefWindowProc(Window, Message, WParam, LParam);
 }
 
@@ -197,38 +192,48 @@ void ErrorExit(LPTSTR lpszFunction)
     ExitProcess(dw); 
 }
 
+void UnloadGameCode(win32_engine_code* engineMethods) 
+{
+	FreeLibrary(engineMethods->gameCodeDLL);
+	engineMethods->Start = NULL;
+	engineMethods->Update = NULL;
+}
+
 static win32_engine_code Wind32LoadGame(void)
 {
-    win32_engine_code engineMethods = {0};
+	win32_engine_code engineMethods = {0};
 
-    LPCTSTR SourceDLLName = L"Engine.dll";
-    LPCTSTR TempDLLName = L"engine_temp.dll";
+	LPCTSTR SourceDLLName = L"Engine.dll";
+	LPCTSTR TempDLLName = L"engine_temp.dll";
 
-    engineMethods.DLLLastWriteTime = Win32GetLastWriteTime(SourceDLLName);
-    if(CopyFile(SourceDLLName, TempDLLName, false)) {
+	engineMethods.DLLLastWriteTime = Win32GetLastWriteTime(SourceDLLName);
+	if(CopyFile(SourceDLLName, TempDLLName, false)) {
 	OutputDebugStringA("success copy engine_temp dll\n");
 	} else {
 		ErrorExit(TEXT("CopyFile"));
 	}
 
-    engineMethods.gameCodeDLL = LoadLibrary(TempDLLName);
-    if (engineMethods.gameCodeDLL)
-    {
-	engineMethods.Start = (start *)GetProcAddress(engineMethods.gameCodeDLL, "Start");
+	engineMethods.gameCodeDLL = LoadLibrary(TempDLLName);
+	if (engineMethods.gameCodeDLL)
+	{
+		engineMethods.Start = (start *)GetProcAddress(engineMethods.gameCodeDLL, "Start");
 		engineMethods.Update = (update *)GetProcAddress(engineMethods.gameCodeDLL, "Update");
-    } else {
+		engineMethods.SetMethodPointers = (set_method_pointers *)GetProcAddress(engineMethods.gameCodeDLL, "SetMethodPointers");
+	} else {
 		ErrorExit(TEXT("load engine lib"));
-    }
+	}
 
-    if (engineMethods.Start != NULL)
-    {
+	if (engineMethods.Start != NULL)
+	{
 		OutputDebugStringA("success loaded render function\n");
-    } else {
+	} else {
 		ErrorExit(TEXT("load start method"));
-    }
+	}
 
-    return (engineMethods);
+	return (engineMethods);
 }
+
+static void* gMem;
 
 int CALLBACK
 WinMain(HINSTANCE Instance,
@@ -236,6 +241,9 @@ WinMain(HINSTANCE Instance,
 	LPSTR CommandLine,
 	int ShowCode)
 {
+	gMem = malloc(1024* 1024* 1024);
+	ZeroMemory(gMem, 1024 * 1024 * 1024);
+
 	HWND WindowHandle;
 	WNDCLASSEX wnd;
 	ZeroMemory(&wnd, sizeof(WNDCLASSEX));
@@ -366,15 +374,27 @@ WinMain(HINSTANCE Instance,
 	gameMemory.CreateVertexBuffer = CreateVertexBuffer;
 	gameMemory.SetBuffers = SetBuffers;
 	gameMemory.getInput = Win32GetInput;
+	gameMemory.memory = gMem;
 
 	win32_engine_code engineMethods = {0};
 	engineMethods = Wind32LoadGame();
 
+	engineMethods.SetMethodPointers(&gameMemory);
 	engineMethods.Start(&gameMemory);
+	
 
 	MSG Message = { 0 };
+	unsigned int LoadCounter = 0;
 	while (true)
 	{
+		if (LoadCounter++ > 120)
+		{
+			UnloadGameCode(&engineMethods);
+			engineMethods = Wind32LoadGame();
+			engineMethods.SetMethodPointers(&gameMemory);
+			LoadCounter = 0;
+		}
+
 		if (PeekMessage(&Message, 0, 0, 0, PM_REMOVE) > 0)
 		{
 			TranslateMessage(&Message);
