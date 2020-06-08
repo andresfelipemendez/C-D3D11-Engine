@@ -44,37 +44,38 @@ void_pGameMemory(SetMethodPointers)
 	InitEntityManager(memory->memory);
 	InitSystemManager();
 
-	registerSystem(RenderingSystem);
+	
 	registerSystem(input_system);
 	registerSystem(BounceSystem);
+	registerSystem(RenderingSystem);
 }
 
 void_pGameMemory(Start) 
 {
 	TraslationComponent t1 = {0};
-	t1.x = 0.1f;
-	t1.y = 1;
+	t1.x = 2.5f;
+	t1.y = 0;
 	t1.z = -5.15;
 	archetypeRendererTraslationInput->translations[0] = t1;
 	unsigned int indices[] = {3, 1, 0, 0, 1, 2};
 	archetypeRendererTraslationInput->renderingComponents[0].pIndexBuffer = 
 		createIndexBuffer(indices, NELEMS(indices));
 	SimpleVertexCombined vertices[] = {
-		{{-1.0f,  1.0f, 0.0f}, {1.0f, 1.0f, 1.0f}},
-		{{-0.9f,  1.0f, 0.0f}, {1.0f, 1.0f, 1.0f}},
-		{{-0.9f, -1.0f, 0.0f}, {1.0f, 1.0f, 1.0f}},
+		{{-0.1f,  1.0f, 0.0f}, {1.0f, 1.0f, 1.0f}},
+		{{ 0.1f,  1.0f, 0.0f}, {1.0f, 1.0f, 1.0f}},
+		{{-0.1f, -1.0f, 0.0f}, {1.0f, 1.0f, 1.0f}},
 
-		{{-1.0f,  1.0f, 0.0f}, {1.0f, 1.0f, 1.0f}},
-		{{-0.9f, -1.0f, 0.0f}, {1.0f, 1.0f, 1.0f}},
-		{{-1.0f, -1.0f, 0.0f}, {1.0f, 1.0f, 1.0f}}
+		{{-0.1f, -1.0f, 0.0f}, {1.0f, 1.0f, 1.0f}},
+		{{ 0.1f,  1.0f, 0.0f}, {1.0f, 1.0f, 1.0f}},
+		{{ 0.1f, -1.0f, 0.0f}, {1.0f, 1.0f, 1.0f}}
 	};
 	archetypeRendererTraslationInput->renderingComponents[0].pVertexBuffer = 
 		createVertexBuffer(vertices, NELEMS(vertices));
     
 
 	TraslationComponent t2 = {0};
-	t2.x = 0;
-	t2.y = -1;
+	t2.x = -2.5;
+	t2.y = 0;
 	t2.z = -5.15;
 	archetypeRendererTraslationInput->translations[1] = t2;
 
@@ -82,13 +83,13 @@ void_pGameMemory(Start)
 	archetypeRendererTraslationInput->renderingComponents[1].pIndexBuffer =
 		createIndexBuffer(indices2, NELEMS(indices2));
 	SimpleVertexCombined vertices2[] = {
-		{{0.9f,  1.0f, 0.0f}, {1.0f, 1.0f, 1.0f}},
-		{{1.0f,  1.0f, 0.0f}, {1.0f, 1.0f, 1.0f}},
-		{{0.9f, -1.0f, 0.0f}, {1.0f, 1.0f, 1.0f}},
+		{{-0.1f,  1.0f, 0.0f}, {1.0f, 1.0f, 1.0f}},
+		{{ 0.1f,  1.0f, 0.0f}, {1.0f, 1.0f, 1.0f}},
+		{{-0.1f, -1.0f, 0.0f}, {1.0f, 1.0f, 1.0f}},
 
-		{{0.9f, -1.0f, 0.0f}, {1.0f, 1.0f, 1.0f}},
-		{{1.0f,  1.0f, 0.0f}, {1.0f, 1.0f, 1.0f}},
-		{{1.0f, -1.0f, 0.0f}, {1.0f, 1.0f, 1.0f}}
+		{{-0.1f, -1.0f, 0.0f}, {1.0f, 1.0f, 1.0f}},
+		{{ 0.1f,  1.0f, 0.0f}, {1.0f, 1.0f, 1.0f}},
+		{{ 0.1f, -1.0f, 0.0f}, {1.0f, 1.0f, 1.0f}}
 	};
 	archetypeRendererTraslationInput->renderingComponents[1].pVertexBuffer 
 		= createVertexBuffer(vertices2, NELEMS(vertices2));
@@ -105,10 +106,9 @@ void_pGameMemory(Start)
 	archetypeRendererTraslationBounce->translations[0] = t3;
 
 	BounceComponent bc = { 0 };
-	bc.velocity.x = 0.01f;
-	bc.velocity.y = 0.01f;
-	/*bc.velocity.x = 0.00f;
-	bc.velocity.y = 0.00f;*/
+	bc.velocity.x = 0.02f;
+	bc.velocity.y = -0.02f;
+	
 	archetypeRendererTraslationBounce->bounceComponents[0] = bc;
 
 	unsigned int indices3[] = { 1, 3, 0, 1, 0, 2 };

@@ -24,7 +24,7 @@ void InitMatrixTransform()
 	vector3 position = {0};
 	position.x = 0;
 	position.y = 0;
-	position.z = -5.15;
+	position.z = 0;
 	CalculateMatrix(position);
 }
 
