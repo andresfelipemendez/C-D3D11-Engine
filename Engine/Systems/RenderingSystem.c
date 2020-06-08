@@ -5,7 +5,7 @@
 extern unsigned int* pNumEntitiesARRTI;
 extern unsigned int* pNumEntitiesARRTB;
 
-void renderingSystem(void)
+void RenderingSystem(void)
 {
 	RenderingComponent* p = archetypeRendererTraslationInput->renderingComponents; 
 	TraslationComponent* t = archetypeRendererTraslationInput->translations; 
