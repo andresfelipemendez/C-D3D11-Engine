@@ -2,7 +2,7 @@
 #include "EntityManager.h"
 #include "Systems/RenderingSystem.h"
 #include "Systems/InputSystem.h"
-
+#include "Systems/BounceSystem.h"
 
 vector3 add(vector3 a, vector3 b)
 {
@@ -44,8 +44,9 @@ void_pGameMemory(SetMethodPointers)
 	InitEntityManager(memory->memory);
 	InitSystemManager();
 
-	registerSystem(renderingSystem);
+	registerSystem(RenderingSystem);
 	registerSystem(input_system);
+	registerSystem(BounceSystem);
 }
 
 void_pGameMemory(Start) 
@@ -104,8 +105,11 @@ void_pGameMemory(Start)
 	archetypeRendererTraslationBounce->translations[0] = t3;
 
 	BounceComponent bc = { 0 };
-	bc.velocity.x = 1.0f;
-	bc.velocity.y = 1.0f;
+	bc.velocity.x = 0.01f;
+	bc.velocity.y = 0.01f;
+	/*bc.velocity.x = 0.00f;
+	bc.velocity.y = 0.00f;*/
+	archetypeRendererTraslationBounce->bounceComponents[0] = bc;
 
 	unsigned int indices3[] = { 1, 3, 0, 1, 0, 2 };
 	
@@ -116,12 +120,12 @@ void_pGameMemory(Start)
 
 	SimpleVertexCombined vertices3[] = {
 		{{-0.1f,  0.1f, 0.0f}, {1.0f, 1.0f, 1.0f}},
-		{{0.1f,  0.1f, 0.0f}, {1.0f, 1.0f, 1.0f}},
+		{{ 0.1f,  0.1f, 0.0f}, {1.0f, 1.0f, 1.0f}},
 		{{-0.1f, -0.1f, 0.0f}, {1.0f, 1.0f, 1.0f}},
 
 		{{-0.1f, -0.1f, 0.0f}, {1.0f, 1.0f, 1.0f}},
-		{{0.1f,  0.1f, 0.0f}, {1.0f, 1.0f, 1.0f}},
-		{{0.1f, -0.1f, 0.0f}, {1.0f, 1.0f, 1.0f}}
+		{{ 0.1f,  0.1f, 0.0f}, {1.0f, 1.0f, 1.0f}},
+		{{ 0.1f, -0.1f, 0.0f}, {1.0f, 1.0f, 1.0f}}
 	};	
 	archetypeRendererTraslationBounce->renderingComponents[0].pVertexBuffer
 		= createVertexBuffer(vertices3, NELEMS(vertices3));
