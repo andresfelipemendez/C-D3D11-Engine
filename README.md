@@ -22,7 +22,7 @@ I expect to replace Direct X SDK implementing a simple math lib
 - [ ] Game Logic, scores and that kind of stuff
 
 ## Engine TODO
-perhaps this wont be added to this version of the engine but I keep this in the horizon
+perhaps this won't be added to this version of the engine but I keep this in the horizon
 - [ ] PBR
 - [ ] Multi-platform support, 
 	- [ ] Linux
@@ -36,3 +36,7 @@ perhaps this wont be added to this version of the engine but I keep this in the 
 1. Install [Direct x SDK](https://www.microsoft.com/en-us/download/details.aspx?id=6812)
 2. Clone the Repo
 3. Build with Visual Studio 2019
+
+# Resources I Follow
+
+- http://www.rastertek.com

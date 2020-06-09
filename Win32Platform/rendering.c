@@ -245,6 +245,9 @@ void SetBuffers(vector3 pos, unsigned int numIndices, void* indexBuffer, void* v
 	bufferNumber = 0;
 	d3dctx->lpVtbl->VSSetConstantBuffers(d3dctx, bufferNumber, 1, &m_matrixBuffer);
 
+	d3dctx->lpVtbl->PSSetShaderResources(d3dctx, 0, 1, &m_texture);
+
+
 	unsigned int off = 0;
 	unsigned int str = sizeof(SimpleVertexCombined);
 	//d3dctx->lpVtbl->IASetIndexBuffer(d3dctx, indexBuffer, DXGI_FORMAT_R32_UINT, 0); // drawing triangle list

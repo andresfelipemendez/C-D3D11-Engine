@@ -119,13 +119,13 @@ void_pGameMemory(Start)
 		= NELEMS(indices3);
 
 	SimpleVertexCombined vertices3[] = {
-		{{-0.1f,  0.1f, 0.0f}, {1.0f, 1.0f, 1.0f}, {0,0}},
-		{{ 0.1f,  0.1f, 0.0f}, {1.0f, 1.0f, 1.0f}, {0,0}},
-		{{-0.1f, -0.1f, 0.0f}, {1.0f, 1.0f, 1.0f}, {0,0}},
+		{{-0.1f,  0.1f, 0.0f}, {0.5f, 0.5f, 0.5f}, {0,1}},
+		{{ 0.1f,  0.1f, 0.0f}, {0.5f, 0.5f, 0.5f}, {1,1}},
+		{{-0.1f, -0.1f, 0.0f}, {0.5f, 0.5f, 0.5f}, {0,0}},
 
-		{{-0.1f, -0.1f, 0.0f}, {1.0f, 1.0f, 1.0f}, {0,0}},
-		{{ 0.1f,  0.1f, 0.0f}, {1.0f, 1.0f, 1.0f}, {0,0}},
-		{{ 0.1f, -0.1f, 0.0f}, {1.0f, 1.0f, 1.0f}, {0,0}}
+		{{-0.1f, -0.1f, 0.0f}, {0.5f, 0.5f, 0.5f}, {0,0}},
+		{{ 0.1f,  0.1f, 0.0f}, {0.5f, 0.5f, 0.5f}, {1,1}},
+		{{ 0.1f, -0.1f, 0.0f}, {0.5f, 0.5f, 0.5f}, {1,0}}
 	};	
 	archetypeRendererTraslationBounce->renderingComponents[0].pVertexBuffer
 		= createVertexBuffer(vertices3, NELEMS(vertices3));
