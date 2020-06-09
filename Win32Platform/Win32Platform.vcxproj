@@ -94,10 +94,11 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Lib\x86;C:\Program Files (x86)\Windows Kits\10\Lib\10.0.18362.0\um\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>User32.lib;Gdi32.lib;dxguid.lib;DXGI.lib;D3D11.lib;D3DCompiler.lib;D3dx9.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>User32.lib;Gdi32.lib;dxguid.lib;DXGI.lib;D3D11.lib;D3DX11.lib;D3DCompiler.lib;D3dx9.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /y $(ProjectDir)shader.shader $(OutDir)</Command>
+      <Command>xcopy /y $(ProjectDir)shader.shader $(OutDir)
+xcopy /y $(ProjectDir)font.png $(OutDir)</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -127,10 +128,11 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Lib\x86;C:\Program Files (x86)\Windows Kits\10\Lib\10.0.18362.0\um\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>User32.lib;Gdi32.lib;dxguid.lib;DXGI.lib;D3D11.lib;D3DCompiler.lib;D3dx9.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>User32.lib;Gdi32.lib;dxguid.lib;DXGI.lib;D3D11.lib;D3DX11.lib;D3DCompiler.lib;D3dx9.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /y $(ProjectDir)shader.shader $(OutDir)</Command>
+      <Command>xcopy /y $(ProjectDir)shader.shader $(OutDir)
+xcopy /y $(ProjectDir)font.png $(OutDir)</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">

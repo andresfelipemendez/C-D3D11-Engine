@@ -26,6 +26,7 @@ ID3D11VertexShader* pVS;
 ID3D11PixelShader* pPS;
 
 //ID3D11Texture2D* pFontTexture = NULL;
+ID3D11ShaderResourceView* m_texture;
 
 static ID3D11Buffer* g_pIndexBuffer = NULL;
 static ID3D11Buffer* g_pVertexBuffer = NULL;

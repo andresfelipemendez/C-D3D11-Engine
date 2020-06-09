@@ -10,6 +10,9 @@
 
 int input = 0;
 
+
+ID3D11SamplerState* m_sampleState;
+
 typedef struct
 {
     HMODULE gameCodeDLL;
@@ -350,28 +353,51 @@ WinMain(HINSTANCE Instance,
 	if (FAILED(hr)) {
 		OutputDebugStringA((char*)msg->lpVtbl->GetBufferPointer(msg));
 		checkres(hr);
-		//errorBlob->Release();
 	}
 	
 	hr = D3DCompileFromFile(L"shader.shader", 0, 0, "PShader", "ps_4_0", 0, 0, &PS, &msg);
 	checkres(hr);
 	
-
 	hr = d3ddev->lpVtbl->CreateVertexShader(d3ddev, VS->lpVtbl->GetBufferPointer(VS), VS->lpVtbl->GetBufferSize(VS), NULL, &pVS);
 	d3ddev->lpVtbl->CreatePixelShader(d3ddev, PS->lpVtbl->GetBufferPointer(PS), PS->lpVtbl->GetBufferSize(PS), NULL, &pPS);
 
-	d3dctx->lpVtbl->VSSetShader(d3dctx, pVS, 0, 0);
-	d3dctx->lpVtbl->PSSetShader(d3dctx, pPS, 0, 0);
+	D3D11_SAMPLER_DESC samplerDesc;
+	samplerDesc.Filter = D3D11_FILTER_MIN_MAG_MIP_LINEAR;
+	samplerDesc.AddressU = D3D11_TEXTURE_ADDRESS_WRAP;
+	samplerDesc.AddressV = D3D11_TEXTURE_ADDRESS_WRAP;
+	samplerDesc.AddressW = D3D11_TEXTURE_ADDRESS_WRAP;
+	samplerDesc.MipLODBias = 0.0f;
+	samplerDesc.MaxAnisotropy = 1;
+	samplerDesc.ComparisonFunc = D3D11_COMPARISON_ALWAYS;
+	samplerDesc.BorderColor[0] = 0;
+	samplerDesc.BorderColor[1] = 0;
+	samplerDesc.BorderColor[2] = 0;
+	samplerDesc.BorderColor[3] = 0;
+	samplerDesc.MinLOD = 0;
+	samplerDesc.MaxLOD = D3D11_FLOAT32_MAX;
+	hr = d3ddev->lpVtbl->CreateSamplerState(d3ddev, &samplerDesc, &m_sampleState);
 
 	D3D11_INPUT_ELEMENT_DESC ied[] =
 	{
 		{"POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0},
 		{"COLOR", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 12, D3D11_INPUT_PER_VERTEX_DATA, 0},
-		{"TEX", 0, DXGI_FORMAT_R32G32_FLOAT, 0, 24, D3D11_INPUT_PER_VERTEX_DATA, 0}
+		{"TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT, 0, 24, D3D11_INPUT_PER_VERTEX_DATA, 0}
 	};
 
 	d3ddev->lpVtbl->CreateInputLayout(d3ddev, ied, 2, VS->lpVtbl->GetBufferPointer(VS), VS->lpVtbl->GetBufferSize(VS), &m_layout);
+
 	d3dctx->lpVtbl->IASetInputLayout(d3dctx, m_layout);
+	d3dctx->lpVtbl->VSSetShader(d3dctx, pVS, 0, 0);
+	d3dctx->lpVtbl->PSSetShader(d3dctx, pPS, 0, 0);
+	d3dctx->lpVtbl->PSSetSamplers(d3dctx, 0, 1, &m_sampleState);
+
+	hr = D3DX11CreateShaderResourceViewFromFile(d3ddev, L"font.png", NULL, NULL, &m_texture, NULL);
+	if (FAILED(hr))
+	{
+		checkres(hr);
+	}
+
+	
 
 	ShowWindow(WindowHandle, ShowCode);
 
