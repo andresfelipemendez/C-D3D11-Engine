@@ -3,6 +3,7 @@
 typedef struct {
 	float Pos[3];
 	float Col[3];
+	float Tex[2];
 } SimpleVertexCombined;
 
 typedef struct {
