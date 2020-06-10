@@ -9,7 +9,6 @@ void RenderingSystem(void)
 {
 	RenderingComponent* p = archetypeRendererTraslationInput->renderingComponents; 
 	TraslationComponent* t = archetypeRendererTraslationInput->translations; 
-
 	unsigned int numRenderingComponents = *pNumEntitiesARRTI;
 	for (int i = 0; i < numRenderingComponents; i++)
 	{
