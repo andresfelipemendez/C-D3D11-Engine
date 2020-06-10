@@ -10,9 +10,6 @@
 
 int input = 0;
 
-
-ID3D11SamplerState* m_sampleState;
-
 typedef struct
 {
     HMODULE gameCodeDLL;
@@ -22,7 +19,6 @@ typedef struct
     set_method_pointers* SetMethodPointers;
 } win32_engine_code;
 
-//todo: this should come from the engine
 const int SCREEN_WIDTH = 800;
 const int SCREEN_HEIGHT = 600;
 
@@ -323,14 +319,8 @@ WinMain(HINSTANCE Instance,
 		NULL,
 		&d3dctx);
 
-
 	hr = sc->lpVtbl->GetBuffer(sc, 0, &IID_ID3D11Texture2D, (void**)&d3dbb);
-	if (FAILED(hr))
-	{
-		OutputDebugStringA("GetBuffer FAILED");
-		return;
-	}
-
+	
 	D3D11_RENDER_TARGET_VIEW_DESC vd;
 	D3D11_VIEWPORT vp;
 	vd.Format = DXGI_FORMAT_UNKNOWN;
@@ -350,13 +340,8 @@ WinMain(HINSTANCE Instance,
 	ID3D10Blob* VS, * PS;
 	ID3D10Blob* msg = NULL;
 	hr = D3DCompileFromFile(L"shader.shader", 0, 0, "VShader", "vs_4_0", 0, 0, &VS, &msg);
-	if (FAILED(hr)) {
-		OutputDebugStringA((char*)msg->lpVtbl->GetBufferPointer(msg));
-		checkres(hr);
-	}
 	
 	hr = D3DCompileFromFile(L"shader.shader", 0, 0, "PShader", "ps_4_0", 0, 0, &PS, &msg);
-	checkres(hr);
 	
 	hr = d3ddev->lpVtbl->CreateVertexShader(d3ddev, VS->lpVtbl->GetBufferPointer(VS), VS->lpVtbl->GetBufferSize(VS), NULL, &pVS);
 	d3ddev->lpVtbl->CreatePixelShader(d3ddev, PS->lpVtbl->GetBufferPointer(PS), PS->lpVtbl->GetBufferSize(PS), NULL, &pPS);
@@ -376,12 +361,12 @@ WinMain(HINSTANCE Instance,
 	samplerDesc.MinLOD = 0;
 	samplerDesc.MaxLOD = D3D11_FLOAT32_MAX;
 	hr = d3ddev->lpVtbl->CreateSamplerState(d3ddev, &samplerDesc, &m_sampleState);
-
+	
 	D3D11_INPUT_ELEMENT_DESC ied[] =
 	{
 		{"POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0},
-		{"COLOR", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 12, D3D11_INPUT_PER_VERTEX_DATA, 0},
-		{"TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT, 0, 24, D3D11_INPUT_PER_VERTEX_DATA, 0}
+		{"COLOR", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, D3D11_APPEND_ALIGNED_ELEMENT , D3D11_INPUT_PER_VERTEX_DATA, 0},
+		{"TEXCOORD0", 0, DXGI_FORMAT_R32G32_FLOAT, 0, D3D11_APPEND_ALIGNED_ELEMENT , D3D11_INPUT_PER_VERTEX_DATA, 0}
 	};
 
 	d3ddev->lpVtbl->CreateInputLayout(d3ddev, ied, 2, VS->lpVtbl->GetBufferPointer(VS), VS->lpVtbl->GetBufferSize(VS), &m_layout);
@@ -391,14 +376,8 @@ WinMain(HINSTANCE Instance,
 	d3dctx->lpVtbl->PSSetShader(d3dctx, pPS, 0, 0);
 	d3dctx->lpVtbl->PSSetSamplers(d3dctx, 0, 1, &m_sampleState);
 
-	hr = D3DX11CreateShaderResourceViewFromFile(d3ddev, L"font.png", NULL, NULL, &m_texture, NULL);
-	if (FAILED(hr))
-	{
-		checkres(hr);
-	}
-
+	hr = D3DX11CreateShaderResourceViewFromFile(d3ddev, L"awdli-om21s.dds", NULL, NULL, &m_texture, NULL);
 	
-
 	ShowWindow(WindowHandle, ShowCode);
 
 	InitMatrixTransform();
@@ -417,7 +396,6 @@ WinMain(HINSTANCE Instance,
 	engineMethods.SetMethodPointers(&gameMemory);
 	engineMethods.Start(&gameMemory);
 	
-
 	MSG Message = { 0 };
 	unsigned int LoadCounter = 0;
 	while (true)

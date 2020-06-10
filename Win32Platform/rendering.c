@@ -159,23 +159,6 @@ void* CreateIndexBuffer(unsigned int* indices, unsigned int size)
 	return pIndexBuffer;
 }
 
-void CreateTexture() {
-	D3D11_TEXTURE2D_DESC desc;
-	desc.Width = 341;
-	desc.Height = 125;
-	desc.MipLevels = desc.ArraySize = 1;
-	desc.Format = DXGI_FORMAT_B8G8R8A8_UNORM;
-	desc.SampleDesc.Count = 1;
-	desc.Usage = D3D11_USAGE_DYNAMIC;
-	desc.BindFlags = D3D11_BIND_SHADER_RESOURCE;
-	desc.CPUAccessFlags = D3D10_CPU_ACCESS_WRITE;
-	desc.MiscFlags = 0;
-
-	D3D11_SUBRESOURCE_DATA initData;
-
-	
-}
-
 void* CreateVertexBuffer(SimpleVertexCombined* vertices, unsigned int size)
 {
 	D3D11_BUFFER_DESC bufferDesc;
@@ -250,9 +233,10 @@ void SetBuffers(vector3 pos, unsigned int numIndices, void* indexBuffer, void* v
 
 	unsigned int off = 0;
 	unsigned int str = sizeof(SimpleVertexCombined);
-	//d3dctx->lpVtbl->IASetIndexBuffer(d3dctx, indexBuffer, DXGI_FORMAT_R32_UINT, 0); // drawing triangle list
+	d3dctx->lpVtbl->IASetIndexBuffer(d3dctx, indexBuffer, DXGI_FORMAT_R32_UINT, 0); // drawing triangle list
 	d3dctx->lpVtbl->IASetVertexBuffers(d3dctx, 0, 1, &vertexBuffer, &str, &off);
 	d3dctx->lpVtbl->IASetPrimitiveTopology(d3dctx, D3D10_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
-	d3dctx->lpVtbl->Draw(d3dctx, 6, 0);
+	d3dctx->lpVtbl->DrawIndexed(d3dctx, numIndices, 0, 0);
+	//d3dctx->lpVtbl->Draw(d3dctx, 6, 0);
 }
