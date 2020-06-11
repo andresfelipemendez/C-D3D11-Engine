@@ -63,10 +63,10 @@ void_pGameMemory(Start)
 	archetypeRendererTraslationInput->renderingComponents[0].pIndexBuffer = 
 		createIndexBuffer(indices, NELEMS(indices));
 	SimpleVertexCombined vertices[] = {
-		{{-0.1f,  1.0f, 0.0f}, {1.0f, 1.0f, 1.0f}, {0,1}},
-		{{ 0.1f,  1.0f, 0.0f}, {1.0f, 1.0f, 1.0f}, {1,1}},
-		{{-0.1f, -1.0f, 0.0f}, {1.0f, 1.0f, 1.0f}, {0,0}},
-		{{ 0.1f, -1.0f, 0.0f}, {1.0f, 1.0f, 1.0f}, {1,0}},
+		{{-0.1f,  1.0f, 0.0f}, {0.05f, 0.5f, 0.5f, 0.5f}, {0,1}},
+		{{ 0.1f,  1.0f, 0.0f}, {0.05f, 0.5f, 0.5f, 0.5f}, {1,1}},
+		{{-0.1f, -1.0f, 0.0f}, {0.05f, 0.5f, 0.5f, 0.5f}, {0,0}},
+		{{ 0.1f, -1.0f, 0.0f}, {0.05f, 0.5f, 0.5f, 0.5f}, {1,0}},
 	};
 	archetypeRendererTraslationInput->renderingComponents[0].pVertexBuffer = 
 		createVertexBuffer(vertices, NELEMS(vertices));
@@ -84,10 +84,10 @@ void_pGameMemory(Start)
 	archetypeRendererTraslationInput->renderingComponents[1].pIndexBuffer =
 		createIndexBuffer(indices2, NELEMS(indices2));
 	SimpleVertexCombined vertices2[] = {
-		{{-0.1f,  1.0f, 0.0f}, {1.0f, 1.0f, 1.0f}, {0,1}},
-		{{ 0.1f,  1.0f, 0.0f}, {1.0f, 1.0f, 1.0f}, {1,1}},
-		{{-0.1f, -1.0f, 0.0f}, {1.0f, 1.0f, 1.0f}, {0,0}},
-		{{ 0.1f, -1.0f, 0.0f}, {1.0f, 1.0f, 1.0f}, {1,0}},
+		{{-0.1f,  1.0f, 0.0f}, {0.05f, 0.5f, 0.5f, 0.5f}, {0,1}},
+		{{ 0.1f,  1.0f, 0.0f}, {0.05f, 0.5f, 0.5f, 0.5f}, {1,1}},
+		{{-0.1f, -1.0f, 0.0f}, {0.05f, 0.5f, 0.5f, 0.5f}, {0,0}},
+		{{ 0.1f, -1.0f, 0.0f}, {0.05f, 0.5f, 0.5f, 0.5f}, {1,0}},
 	};
 	archetypeRendererTraslationInput->renderingComponents[1].pVertexBuffer 
 		= createVertexBuffer(vertices2, NELEMS(vertices2));
@@ -117,10 +117,10 @@ void_pGameMemory(Start)
 		= NELEMS(indices3);
 
 	SimpleVertexCombined vertices3[] = {
-		{{-0.1f,  0.1f, 0.0f}, {1.0f, 1.0f, 1.0f}, {0,1}},
-		{{ 0.1f,  0.1f, 0.0f}, {1.0f, 1.0f, 1.0f}, {1,1}},
-		{{-0.1f, -0.1f, 0.0f}, {1.0f, 1.0f, 1.0f}, {0,0}},
-		{{ 0.1f, -0.1f, 0.0f}, {1.0f, 1.0f, 1.0f}, {1,0}},
+		{{-0.1f,  0.1f, 0.0f}, {0.05f, 0.5f, 0.5f, 0.5f}, {0,1}},
+		{{ 0.1f,  0.1f, 0.0f}, {0.05f, 0.5f, 0.5f, 0.5f}, {1,1}},
+		{{-0.1f, -0.1f, 0.0f}, {0.05f, 0.5f, 0.5f, 0.5f}, {0,0}},
+		{{ 0.1f, -0.1f, 0.0f}, {0.05f, 0.5f, 0.5f, 0.5f}, {1,0}},
 	};	
 	archetypeRendererTraslationBounce->renderingComponents[0].pVertexBuffer
 		= createVertexBuffer(vertices3, NELEMS(vertices3));
