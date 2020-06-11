@@ -19,6 +19,7 @@ SamplerState SampleType;
 VOut VShader(float4 position : POSITION, float4 color : COLOR, float2 tex : TEXCOORD0)
 {
     VOut output;
+    position.w = 1.0f;
 
     output.position = mul(position,worldMatrix);
     output.position = mul(output.position,viewMatrix);
@@ -32,5 +33,5 @@ VOut VShader(float4 position : POSITION, float4 color : COLOR, float2 tex : TEXC
 float4 PShader(float4 position : SV_POSITION, float4 color : COLOR, float2 tex : TEXCOORD0) : SV_TARGET
 {
        
-    return color;
+    return color + shaderTexture.Sample(SampleType, tex);
 }
