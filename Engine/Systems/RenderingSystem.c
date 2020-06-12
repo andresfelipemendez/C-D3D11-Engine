@@ -4,6 +4,7 @@
 
 extern unsigned int* pNumEntitiesARRTI;
 extern unsigned int* pNumEntitiesARRTB;
+extern unsigned int* pNumentitiesAFTS;
 
 void RenderingSystem(void)
 {
@@ -39,4 +40,20 @@ void RenderingSystem(void)
 		t++;
 	}
 
+	FontRenderingComponent* f = archetypeFontRenderingComponentTraslationScoreComponent->fontRenderingComponets;
+	t = archetypeFontRenderingComponentTraslationScoreComponent->translations;
+
+	numRenderingComponents = *pNumentitiesAFTS;
+	for (int i = 0; i < numRenderingComponents; i++)
+	{
+		FontRenderingComponent fc = (*f);
+		TraslationComponent tc = (*t);
+		vector3 pos = { 0 };
+		pos.x = tc.x;
+		pos.y = tc.y;
+		pos.z = tc.z;
+		setBuffers(pos, fc.numIndices, fc.pIndexBuffer, fc.pVertexBuffer);
+		p++;
+		t++;
+	}
 }
