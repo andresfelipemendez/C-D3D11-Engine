@@ -6,6 +6,7 @@
 #include "Components/InputComponent.h"
 #include "Components/BounceComponent.h"
 
+
 typedef struct {
 	RenderingComponent* renderingComponents;
 	RectangleComponent* rectangles;
@@ -22,3 +23,12 @@ typedef struct {
 } ArchetypeRendererTraslationBounce;
 
 ArchetypeRendererTraslationBounce* archetypeRendererTraslationBounce;
+
+typedef struct {
+	FontRenderingComponent* fontRenderingComponets;
+	TraslationComponent* translations;
+	int* scores;
+} ArchetypeFontRenderingComponentTraslationScoreComponent;
+
+ArchetypeFontRenderingComponentTraslationScoreComponent*
+	archetypeFontRenderingComponentTraslationScoreComponent;

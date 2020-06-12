@@ -97,8 +97,12 @@
       <AdditionalDependencies>User32.lib;Gdi32.lib;dxguid.lib;DXGI.lib;D3D11.lib;D3DX11.lib;D3DCompiler.lib;D3dx9.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /y $(ProjectDir)shader.shader $(OutDir)</Command>
+      <Command>
+      </Command>
     </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>xcopy /y $(ProjectDir)shader.shader $(OutDir)</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -130,8 +134,12 @@
       <AdditionalDependencies>User32.lib;Gdi32.lib;dxguid.lib;DXGI.lib;D3D11.lib;D3DX11.lib;D3DCompiler.lib;D3dx9.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /y $(ProjectDir)shader.shader $(OutDir)</Command>
+      <Command>
+      </Command>
     </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>xcopy /y $(ProjectDir)shader.shader $(OutDir)</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>

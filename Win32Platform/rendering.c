@@ -215,6 +215,11 @@ void CalculateMatrix(vector3 position) {
 
 void SetBuffers(vector3 pos, unsigned int numIndices, void* indexBuffer, void* vertexBuffer) 
 {
+	D3D11_MAPPED_SUBRESOURCE resource;
+	/*d3dDeviceContext->Map(vertexBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &resource);
+	memcpy(resource.pData, sourceData, vertexDataSize);
+	d3dDeviceContext->Unmap(vertexBuffer, 0);*/
+
 	CalculateMatrix(pos);
 
 	HRESULT result = d3dctx->lpVtbl->Map(d3dctx, m_matrixBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource);
@@ -225,18 +230,15 @@ void SetBuffers(vector3 pos, unsigned int numIndices, void* indexBuffer, void* v
 	dataPtr->projection = projectionMatrix;
 
 	d3dctx->lpVtbl->Unmap(d3dctx, m_matrixBuffer, 0);
+
 	bufferNumber = 0;
 	d3dctx->lpVtbl->VSSetConstantBuffers(d3dctx, bufferNumber, 1, &m_matrixBuffer);
-
 	d3dctx->lpVtbl->PSSetShaderResources(d3dctx, 0, 1, &m_texture);
-
 
 	unsigned int off = 0;
 	unsigned int str = sizeof(SimpleVertexCombined);
-	d3dctx->lpVtbl->IASetIndexBuffer(d3dctx, indexBuffer, DXGI_FORMAT_R32_UINT, 0); // drawing triangle list
+	d3dctx->lpVtbl->IASetIndexBuffer(d3dctx, indexBuffer, DXGI_FORMAT_R32_UINT, 0);
 	d3dctx->lpVtbl->IASetVertexBuffers(d3dctx, 0, 1, &vertexBuffer, &str, &off);
-	d3dctx->lpVtbl->IASetPrimitiveTopology(d3dctx, D3D10_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
 	d3dctx->lpVtbl->DrawIndexed(d3dctx, numIndices, 0, 0);
-	//d3dctx->lpVtbl->Draw(d3dctx, 6, 0);
 }

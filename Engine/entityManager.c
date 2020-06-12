@@ -7,6 +7,10 @@ unsigned int* pNumEntitiesARRTI = &numentitiesARRTI;
 static unsigned int numentitiesARRTB = 0;
 unsigned int* pNumEntitiesARRTB = &numentitiesARRTB;
 
+static unsigned int numentitiesAFTS = 0;
+unsigned int* pNumentitiesAFTS = &numentitiesAFTS;
+
+
 void InitEntityManager(char* memory) 
 {
 	archetypeRendererTraslationInput = memory;
@@ -43,8 +47,23 @@ void InitEntityManager(char* memory)
 	archetypeRendererTraslationBounce->bounceComponents =
 		archetypeRendererTraslationBounce->translations + 1;
 
+
+	archetypeFontRenderingComponentTraslationScoreComponent = 
+		archetypeRendererTraslationBounce->bounceComponents + 1;
+
+	archetypeFontRenderingComponentTraslationScoreComponent->fontRenderingComponets = 
+		archetypeFontRenderingComponentTraslationScoreComponent + 1;
+
+	archetypeFontRenderingComponentTraslationScoreComponent->translations = 
+		archetypeFontRenderingComponentTraslationScoreComponent->fontRenderingComponets + 2;
+
+	archetypeFontRenderingComponentTraslationScoreComponent->scores =
+		archetypeFontRenderingComponentTraslationScoreComponent->translations + 2;
+
 	// todo change constants for this
 	numentitiesARRTI = 2;
 	numentitiesARRTB = 1;
+	numentitiesAFTS = 2;
+
 }
 

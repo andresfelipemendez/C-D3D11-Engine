@@ -63,10 +63,10 @@ void_pGameMemory(Start)
 	archetypeRendererTraslationInput->renderingComponents[0].pIndexBuffer = 
 		createIndexBuffer(indices, NELEMS(indices));
 	SimpleVertexCombined vertices[] = {
-		{{-0.1f,  1.0f, 0.0f}, {0.05f, 0.5f, 0.5f, 0.5f}, {0,1}},
-		{{ 0.1f,  1.0f, 0.0f}, {0.05f, 0.5f, 0.5f, 0.5f}, {1,1}},
+		{{-0.1f,  1.0f, 0.0f}, {0.05f, 0.5f, 0.5f, 0.5f}, {0,0}},
+		{{ 0.1f,  1.0f, 0.0f}, {0.05f, 0.5f, 0.5f, 0.5f}, {0,0}},
 		{{-0.1f, -1.0f, 0.0f}, {0.05f, 0.5f, 0.5f, 0.5f}, {0,0}},
-		{{ 0.1f, -1.0f, 0.0f}, {0.05f, 0.5f, 0.5f, 0.5f}, {1,0}},
+		{{ 0.1f, -1.0f, 0.0f}, {0.05f, 0.5f, 0.5f, 0.5f}, {0,0}},
 	};
 	archetypeRendererTraslationInput->renderingComponents[0].pVertexBuffer = 
 		createVertexBuffer(vertices, NELEMS(vertices));
@@ -84,10 +84,10 @@ void_pGameMemory(Start)
 	archetypeRendererTraslationInput->renderingComponents[1].pIndexBuffer =
 		createIndexBuffer(indices2, NELEMS(indices2));
 	SimpleVertexCombined vertices2[] = {
-		{{-0.1f,  1.0f, 0.0f}, {0.05f, 0.5f, 0.5f, 0.5f}, {0,1}},
-		{{ 0.1f,  1.0f, 0.0f}, {0.05f, 0.5f, 0.5f, 0.5f}, {1,1}},
+		{{-0.1f,  1.0f, 0.0f}, {0.05f, 0.5f, 0.5f, 0.5f}, {0,0}},
+		{{ 0.1f,  1.0f, 0.0f}, {0.05f, 0.5f, 0.5f, 0.5f}, {0,0}},
 		{{-0.1f, -1.0f, 0.0f}, {0.05f, 0.5f, 0.5f, 0.5f}, {0,0}},
-		{{ 0.1f, -1.0f, 0.0f}, {0.05f, 0.5f, 0.5f, 0.5f}, {1,0}},
+		{{ 0.1f, -1.0f, 0.0f}, {0.05f, 0.5f, 0.5f, 0.5f}, {0,0}},
 	};
 	archetypeRendererTraslationInput->renderingComponents[1].pVertexBuffer 
 		= createVertexBuffer(vertices2, NELEMS(vertices2));
@@ -124,6 +124,77 @@ void_pGameMemory(Start)
 	};	
 	archetypeRendererTraslationBounce->renderingComponents[0].pVertexBuffer
 		= createVertexBuffer(vertices3, NELEMS(vertices3));
+
+	// ---------------
+
+	FontRenderingComponent* frc1 = 
+		&archetypeFontRenderingComponentTraslationScoreComponent->fontRenderingComponets[0];
+
+	unsigned int indices4[] = { 0, 1, 2, 3, 2, 1 };
+	frc1->pIndexBuffer
+		= createIndexBuffer(indices4, NELEMS(indices4));
+	frc1->numIndices
+		= NELEMS(indices4);
+
+	SimpleVertexCombined fvb[] = {
+		{{-0.1f,  0.1f, 0.0f}, {0.05f, 0.5f, 0.5f, 0.5f}, {0,1}},
+		{{ 0.1f,  0.1f, 0.0f}, {0.05f, 0.5f, 0.5f, 0.5f}, {1,1}},
+		{{-0.1f, -0.1f, 0.0f}, {0.05f, 0.5f, 0.5f, 0.5f}, {0,0}},
+		{{ 0.1f, -0.1f, 0.0f}, {0.05f, 0.5f, 0.5f, 0.5f}, {1,0}},
+	};
+	
+	frc1->vertexBuffer[0] = fvb[0];
+	frc1->vertexBuffer[1] = fvb[1];
+	frc1->vertexBuffer[2] = fvb[2];
+	frc1->vertexBuffer[3] = fvb[3];
+
+	frc1->pVertexBuffer
+		= createVertexBuffer(frc1->vertexBuffer, NELEMS(frc1->vertexBuffer));;
+
+	TraslationComponent t4 = { 0 };
+	t4.x = -0.5;
+	t4.y = 1;
+	t4.z = -5.15;
+	archetypeFontRenderingComponentTraslationScoreComponent->translations[0] = t4;
+
+	archetypeFontRenderingComponentTraslationScoreComponent->scores[0] = 0;
+
+	// ---------------
+
+	FontRenderingComponent* frc2 = 
+		&archetypeFontRenderingComponentTraslationScoreComponent->fontRenderingComponets[1];
+	
+	
+	unsigned int indices5[] = { 0, 1, 2, 3, 2, 1 };
+	frc2->pIndexBuffer
+		= createIndexBuffer(indices5, NELEMS(indices5));
+	frc2->numIndices
+		= NELEMS(indices5);
+
+	SimpleVertexCombined fvb2[] = {
+		{{-0.1f,  0.1f, 0.0f}, {0.05f, 0.5f, 0.5f, 0.5f}, {0,1}},
+		{{ 0.1f,  0.1f, 0.0f}, {0.05f, 0.5f, 0.5f, 0.5f}, {1,1}},
+		{{-0.1f, -0.1f, 0.0f}, {0.05f, 0.5f, 0.5f, 0.5f}, {0,0}},
+		{{ 0.1f, -0.1f, 0.0f}, {0.05f, 0.5f, 0.5f, 0.5f}, {1,0}},
+	};
+	
+	frc2->vertexBuffer[0] = fvb2[0];
+	frc2->vertexBuffer[1] = fvb2[1];
+	frc2->vertexBuffer[2] = fvb2[2];
+	frc2->vertexBuffer[3] = fvb2[3];
+
+	frc1->pVertexBuffer
+		= createVertexBuffer(frc2->vertexBuffer, NELEMS(frc2->vertexBuffer));\
+
+	TraslationComponent t5 = { 0 };
+	t5.x = 0.5;
+	t5.y = 1;
+	t5.z = -5.15;
+
+	archetypeFontRenderingComponentTraslationScoreComponent->translations[1] = t5;
+
+	archetypeFontRenderingComponentTraslationScoreComponent->scores[1] = 0;
+
 }
 
 void_pGameMemory(Update) {

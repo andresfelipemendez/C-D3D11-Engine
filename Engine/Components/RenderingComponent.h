@@ -11,3 +11,10 @@ typedef struct {
 	void* pIndexBuffer;
 	void* pVertexBuffer;
 } RenderingComponent;
+
+typedef struct {
+	unsigned int numIndices;
+	SimpleVertexCombined vertexBuffer[4];
+	void* pIndexBuffer;
+	void* pVertexBuffer;
+} FontRenderingComponent;

@@ -25,7 +25,6 @@ ID3D11InputLayout* m_layout;
 ID3D11VertexShader* pVS;
 ID3D11PixelShader* pPS;
 
-//ID3D11Texture2D* pFontTexture = NULL;
 ID3D11ShaderResourceView* m_texture;
 ID3D11SamplerState* m_sampleState;
 
