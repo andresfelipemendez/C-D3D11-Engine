@@ -57,3 +57,16 @@ void RenderingSystem(void)
 		t++;
 	}
 }
+
+
+UvMapping getuv(float textureWidth, float textureHeight, float charX, float charY, float charWidth, float charHeight) {
+
+	UvMapping uvm = {0};
+
+	uvm.L = charX / textureWidth;
+	uvm.R = (charX + charWidth) / textureWidth;
+	uvm.T = charY / textureHeight;
+	uvm.B = (charY + charHeight) / textureHeight;
+
+	return uvm;
+}

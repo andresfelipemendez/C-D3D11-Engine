@@ -127,29 +127,34 @@ void_pGameMemory(Start)
 
 	// ---------------
 
-	FontRenderingComponent* frc1 = 
-		&archetypeFontRenderingComponentTraslationScoreComponent->fontRenderingComponets[0];
+	;
 
 	unsigned int indices4[] = { 0, 1, 2, 3, 2, 1 };
-	frc1->pIndexBuffer
+	archetypeFontRenderingComponentTraslationScoreComponent->fontRenderingComponets[0].pIndexBuffer
 		= createIndexBuffer(indices4, NELEMS(indices4));
-	frc1->numIndices
+	archetypeFontRenderingComponentTraslationScoreComponent->fontRenderingComponets[0].numIndices
 		= NELEMS(indices4);
 
+	
+	int idx = 20;
+	UvMapping uvm1 = getuv(
+		font_Arial.width, 
+		font_Arial.height, 
+		characters_Arial[idx].x,
+		characters_Arial[idx].y,
+		characters_Arial[idx].width,
+		characters_Arial[idx].height
+	);
+
 	SimpleVertexCombined fvb[] = {
-		{{-0.1f,  0.1f, 0.0f}, {0.05f, 0.5f, 0.5f, 0.5f}, {0,1}},
-		{{ 0.1f,  0.1f, 0.0f}, {0.05f, 0.5f, 0.5f, 0.5f}, {1,1}},
-		{{-0.1f, -0.1f, 0.0f}, {0.05f, 0.5f, 0.5f, 0.5f}, {0,0}},
-		{{ 0.1f, -0.1f, 0.0f}, {0.05f, 0.5f, 0.5f, 0.5f}, {1,0}},
+		{{-0.1f,  0.1f, 0.0f}, {0.05f, 0.5f, 0.5f, 0.5f}, {uvm1.B,uvm1.R}},
+		{{ 0.1f,  0.1f, 0.0f}, {0.05f, 0.5f, 0.5f, 0.5f}, {uvm1.T,uvm1.R}},
+		{{-0.1f, -0.1f, 0.0f}, {0.05f, 0.5f, 0.5f, 0.5f}, {uvm1.B,uvm1.L}},
+		{{ 0.1f, -0.1f, 0.0f}, {0.05f, 0.5f, 0.5f, 0.5f}, {uvm1.T,uvm1.L}},
 	};
 	
-	frc1->vertexBuffer[0] = fvb[0];
-	frc1->vertexBuffer[1] = fvb[1];
-	frc1->vertexBuffer[2] = fvb[2];
-	frc1->vertexBuffer[3] = fvb[3];
-
-	frc1->pVertexBuffer
-		= createVertexBuffer(frc1->vertexBuffer, NELEMS(frc1->vertexBuffer));;
+	archetypeFontRenderingComponentTraslationScoreComponent->fontRenderingComponets[0].pVertexBuffer
+		= createVertexBuffer(fvb, NELEMS(fvb));
 
 	TraslationComponent t4 = { 0 };
 	t4.x = -0.5;
@@ -161,30 +166,34 @@ void_pGameMemory(Start)
 
 	// ---------------
 
-	FontRenderingComponent* frc2 = 
-		&archetypeFontRenderingComponentTraslationScoreComponent->fontRenderingComponets[1];
-	
-	
 	unsigned int indices5[] = { 0, 1, 2, 3, 2, 1 };
-	frc2->pIndexBuffer
+	archetypeFontRenderingComponentTraslationScoreComponent->
+		fontRenderingComponets[1].pIndexBuffer
 		= createIndexBuffer(indices5, NELEMS(indices5));
-	frc2->numIndices
+	archetypeFontRenderingComponentTraslationScoreComponent->
+		fontRenderingComponets[1].numIndices
 		= NELEMS(indices5);
 
+	int idx2 = 1;
+	UvMapping uvm2 = getuv(
+		font_Arial.width,
+		font_Arial.height,
+		characters_Arial[idx2].x,
+		characters_Arial[idx2].y,
+		characters_Arial[idx2].width,
+		characters_Arial[idx2].height
+	);
+
 	SimpleVertexCombined fvb2[] = {
-		{{-0.1f,  0.1f, 0.0f}, {0.05f, 0.5f, 0.5f, 0.5f}, {0,1}},
-		{{ 0.1f,  0.1f, 0.0f}, {0.05f, 0.5f, 0.5f, 0.5f}, {1,1}},
-		{{-0.1f, -0.1f, 0.0f}, {0.05f, 0.5f, 0.5f, 0.5f}, {0,0}},
-		{{ 0.1f, -0.1f, 0.0f}, {0.05f, 0.5f, 0.5f, 0.5f}, {1,0}},
+		{{-0.1f,  0.1f, 0.0f}, {0.05f, 0.5f, 0.5f, 0.5f}, {uvm2.B,uvm2.R}},
+		{{ 0.1f,  0.1f, 0.0f}, {0.05f, 0.5f, 0.5f, 0.5f}, {uvm2.T,uvm2.R}},
+		{{-0.1f, -0.1f, 0.0f}, {0.05f, 0.5f, 0.5f, 0.5f}, {uvm2.B,uvm2.L}},
+		{{ 0.1f, -0.1f, 0.0f}, {0.05f, 0.5f, 0.5f, 0.5f}, {uvm2.T,uvm2.L}},
 	};
 	
-	frc2->vertexBuffer[0] = fvb2[0];
-	frc2->vertexBuffer[1] = fvb2[1];
-	frc2->vertexBuffer[2] = fvb2[2];
-	frc2->vertexBuffer[3] = fvb2[3];
-
-	frc1->pVertexBuffer
-		= createVertexBuffer(frc2->vertexBuffer, NELEMS(frc2->vertexBuffer));\
+	archetypeFontRenderingComponentTraslationScoreComponent->
+		fontRenderingComponets[1].pVertexBuffer
+		= createVertexBuffer(fvb2, NELEMS(fvb2));
 
 	TraslationComponent t5 = { 0 };
 	t5.x = 0.5;
