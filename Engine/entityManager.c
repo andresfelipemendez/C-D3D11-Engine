@@ -47,9 +47,14 @@ void InitEntityManager(char* memory)
 	archetypeRendererTraslationBounce->bounceComponents =
 		archetypeRendererTraslationBounce->translations + 1;
 
-
+	archetypeFontRenderingComponentTraslationScoreComponent = NULL;
+	
 	archetypeFontRenderingComponentTraslationScoreComponent = 
 		archetypeRendererTraslationBounce->bounceComponents + 1;
+
+	archetypeFontRenderingComponentTraslationScoreComponent->fontRenderingComponets = NULL;
+	archetypeFontRenderingComponentTraslationScoreComponent->translations = NULL;
+	archetypeFontRenderingComponentTraslationScoreComponent->scores = NULL;
 
 	archetypeFontRenderingComponentTraslationScoreComponent->fontRenderingComponets = 
 		archetypeFontRenderingComponentTraslationScoreComponent + 1;
