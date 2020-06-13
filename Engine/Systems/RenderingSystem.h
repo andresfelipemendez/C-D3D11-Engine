@@ -1,15 +1,12 @@
 #pragma once
+#include "../Components/RenderingComponent.h"
 
-void RenderingSystem(void);
-
-typedef struct UvMapping {
+typedef struct Rect {
 	float L;
 	float R;
 	float T;
 	float B;
-} UvMapping;
-
-UvMapping getuv(float textureWidth, float textureHeight, float charX, float charY, float charWidth, float charHight);
+} Rect;
 
 typedef struct Character {
 	int codePoint, x, y, width, height, originX, originY;
@@ -120,3 +117,9 @@ static Character characters_Arial[] = {
 };
 
 static Font font_Arial = { "Arial", 32, 0, 0, 341, 125, 95, characters_Arial };
+
+void RenderingSystem(void);
+
+Rect getFontMeshRect(Font* font, char c);
+Rect getFontUV(Font* font, char c);
+void GetFontVertexBuffer(Font* font, char c, SimpleVertexCombined* svc);

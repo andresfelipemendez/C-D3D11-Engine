@@ -1,7 +1,32 @@
 #include "BounceSystem.h"
 #include "../EntityManager.h"
+#include "RenderingSystem.h"
+#include "../Engine.h"
 
 extern unsigned int* pNumEntitiesARRTB;
+
+void UpdateScore(unsigned int playerIndex) {
+        int score = ++(archetypeFontRenderingComponentTraslationScoreComponent->scores[playerIndex]);
+        void* vertexBuffer = archetypeFontRenderingComponentTraslationScoreComponent->fontRenderingComponets[playerIndex].pVertexBuffer;
+        char charscore = score + '0';
+        Rect tw2 = getFontMeshRect(&font_Arial, charscore);
+        Rect uvm2 = getFontUV(&font_Arial, charscore);
+
+        SimpleVertexCombined fvb2[] = {
+                {{tw2.L,  0.1f, 0.0f}, {0.0f, 0.0f, 0.0f, 0.0f}, {uvm2.L, uvm2.T}},
+                {{tw2.R,  0.1f, 0.0f}, {0.0f, 0.0f, 0.0f, 0.0f}, {uvm2.R, uvm2.T}},
+                {{tw2.L, -0.1f, 0.0f}, {0.0f, 0.0f, 0.0f, 0.0f}, {uvm2.L, uvm2.B}},
+                {{tw2.R, -0.1f, 0.0f}, {0.0f, 0.0f, 0.0f, 0.0f}, {uvm2.R, uvm2.B}},
+        };
+
+        TraslationComponent t3 = { 0 };
+        t3.x = 0;
+        t3.y = 0;
+        t3.z = -5.15;
+        archetypeRendererTraslationBounce->translations[0] = t3;
+
+        updateVertexBuffer(vertexBuffer, fvb2, NELEMS(fvb2));
+}
 
 void WoldBounce(TraslationComponent* t, BounceComponent* b) {
         if (t->y >= 1.75) {
@@ -9,12 +34,14 @@ void WoldBounce(TraslationComponent* t, BounceComponent* b) {
         }
         if (t->x >= 2.75) {
                 b->velocity.x = -b->velocity.x;
+                UpdateScore(1);
         }
         if (t->y <= -2.05) {
                 b->velocity.y = -b->velocity.y;
         }
         if (t->x <= -2.65) {
                 b->velocity.x = -b->velocity.x;
+                UpdateScore(0);
         }
 }
 

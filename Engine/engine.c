@@ -15,36 +15,27 @@ vector3 add(vector3 a, vector3 b)
 
 void_pGameMemory(SetMethodPointers)
 {
-	if (ptr == 0) {
-		ptr = malloc(sizeof(void*));
-	}
+	ptr = malloc(sizeof(void*));
 	ptr = memory->Print;
 
-	if (pCreateIndexBuffer == 0) {
-		pCreateIndexBuffer = malloc(sizeof(void*));
-	}
+	pCreateIndexBuffer = malloc(sizeof(void*));
 	pCreateIndexBuffer = memory->CreateIndexBuffer;
-
+	pCreateVertexBuffer = malloc(sizeof(void*));
 	
-	if (pCreateVertexBuffer == 0) {
-		pCreateVertexBuffer = malloc(sizeof(void*));
-	}
 	pCreateVertexBuffer = memory->CreateVertexBuffer;
 
-	if (pSetBuffers == 0) {
-		pSetBuffers = malloc(sizeof(void*));
-	}
+	pSetBuffers = malloc(sizeof(void*));
 	pSetBuffers = memory->SetBuffers;
 
-	if (pGetInput == 0) {
-		pGetInput = malloc(sizeof(void*));
-	}
+	pGetInput = malloc(sizeof(void*));
 	pGetInput = memory->getInput;
+
+	pUpdateVertexBuffer = malloc(sizeof(void*));
+	pUpdateVertexBuffer = memory->UpdateVertexBuffer;
 
 	InitEntityManager(memory->memory);
 	InitSystemManager();
 
-	
 	registerSystem(input_system);
 	registerSystem(BounceSystem);
 	registerSystem(RenderingSystem);
@@ -127,7 +118,7 @@ void_pGameMemory(Start)
 
 	// ---------------
 
-	;
+	
 
 	unsigned int indices4[] = { 0, 1, 2, 3, 2, 1 };
 	archetypeFontRenderingComponentTraslationScoreComponent->fontRenderingComponets[0].pIndexBuffer
@@ -135,29 +126,21 @@ void_pGameMemory(Start)
 	archetypeFontRenderingComponentTraslationScoreComponent->fontRenderingComponets[0].numIndices
 		= NELEMS(indices4);
 
-	
-	int idx = 32;
-	UvMapping uvm1 = getuv(
-		font_Arial.width, 
-		font_Arial.height, 
-		characters_Arial[idx].x,
-		characters_Arial[idx].y,
-		characters_Arial[idx].width,
-		characters_Arial[idx].height
-	);
+	Rect tw1 = getFontMeshRect(&font_Arial, '0');
+	Rect uvm1 = getFontUV(&font_Arial, '0');
 	
 	SimpleVertexCombined fvb[] = {
-		{{-0.1f,  0.1f, 0.0f}, {0.05f, 0.5f, 0.5f, 0.5f}, {uvm1.L, uvm1.T}},
-		{{ 0.1f,  0.1f, 0.0f}, {0.05f, 0.5f, 0.5f, 0.5f}, {uvm1.R, uvm1.T}},
-		{{-0.1f, -0.1f, 0.0f}, {0.05f, 0.5f, 0.5f, 0.5f}, {uvm1.L, uvm1.B}},
-		{{ 0.1f, -0.1f, 0.0f}, {0.05f, 0.5f, 0.5f, 0.5f}, {uvm1.R, uvm1.B}},
+		{{tw1.L,  0.1f, 0.0f}, {0.0f, 0.0f, 0.0f, 0.0f}, {uvm1.L, uvm1.T}},
+		{{tw1.R,  0.1f, 0.0f}, {0.0f, 0.0f, 0.0f, 0.0f}, {uvm1.R, uvm1.T}},
+		{{tw1.L, -0.1f, 0.0f}, {0.0f, 0.0f, 0.0f, 0.0f}, {uvm1.L, uvm1.B}},
+		{{tw1.R, -0.1f, 0.0f}, {0.0f, 0.0f, 0.0f, 0.0f}, {uvm1.R, uvm1.B}},
 	};
 	
 	archetypeFontRenderingComponentTraslationScoreComponent->fontRenderingComponets[0].pVertexBuffer
 		= createVertexBuffer(fvb, NELEMS(fvb));
 
 	TraslationComponent t4 = { 0 };
-	t4.x = -0.5;
+	t4.x = 0.5;
 	t4.y = 1;
 	t4.z = -5.15;
 	archetypeFontRenderingComponentTraslationScoreComponent->translations[0] = t4;
@@ -174,37 +157,27 @@ void_pGameMemory(Start)
 		fontRenderingComponets[1].numIndices
 		= NELEMS(indices5);
 
-	int idx2 = 1;
-	UvMapping uvm2 = getuv(
-		font_Arial.width,
-		font_Arial.height,
-		characters_Arial[idx2].x,
-		characters_Arial[idx2].y,
-		characters_Arial[idx2].width,
-		characters_Arial[idx2].height
-	);
 
-	
+	Rect tw2 = getFontMeshRect(&font_Arial, '0');
+	Rect uvm2 = getFontUV(&font_Arial, '0');
+
 	SimpleVertexCombined fvb2[] = {
-		{{-0.1f,  0.1f, 0.0f}, {0.05f, 0.5f, 0.5f, 0.5f}, {uvm2.L, uvm2.T}},
-		{{ 0.1f,  0.1f, 0.0f}, {0.05f, 0.5f, 0.5f, 0.5f}, {uvm2.R, uvm2.T}},
-		{{-0.1f, -0.1f, 0.0f}, {0.05f, 0.5f, 0.5f, 0.5f}, {uvm2.L, uvm2.B}},
-		{{ 0.1f, -0.1f, 0.0f}, {0.05f, 0.5f, 0.5f, 0.5f}, {uvm2.R, uvm2.B}},
+		{{tw2.L,  0.1f, 0.0f}, {0.0f, 0.0f, 0.0f, 0.0f}, {uvm2.L, uvm2.T}},
+		{{tw2.R,  0.1f, 0.0f}, {0.0f, 0.0f, 0.0f, 0.0f}, {uvm2.R, uvm2.T}},
+		{{tw2.L, -0.1f, 0.0f}, {0.0f, 0.0f, 0.0f, 0.0f}, {uvm2.L, uvm2.B}},
+		{{tw2.R, -0.1f, 0.0f}, {0.0f, 0.0f, 0.0f, 0.0f}, {uvm2.R, uvm2.B}},
 	};
 	
-	archetypeFontRenderingComponentTraslationScoreComponent->
-		fontRenderingComponets[1].pVertexBuffer
-		= createVertexBuffer(fvb2, NELEMS(fvb2));
+	archetypeFontRenderingComponentTraslationScoreComponent->fontRenderingComponets[1].pVertexBuffer = 
+		createVertexBuffer(fvb2, NELEMS(fvb2));
 
 	TraslationComponent t5 = { 0 };
-	t5.x = 0.5;
+	t5.x = -0.5;
 	t5.y = 1;
 	t5.z = -5.15;
 
 	archetypeFontRenderingComponentTraslationScoreComponent->translations[1] = t5;
-
 	archetypeFontRenderingComponentTraslationScoreComponent->scores[1] = 0;
-
 }
 
 void_pGameMemory(Update) {

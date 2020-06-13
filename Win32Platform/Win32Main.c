@@ -402,6 +402,7 @@ WinMain(HINSTANCE Instance,
 	gameMemory.Print = Win32Print;
 	gameMemory.CreateIndexBuffer = CreateIndexBuffer;
 	gameMemory.CreateVertexBuffer = CreateVertexBuffer;
+	gameMemory.UpdateVertexBuffer = UpdateVertexBuffer;
 	gameMemory.SetBuffers = SetBuffers;
 	gameMemory.getInput = Win32GetInput;
 	gameMemory.memory = gMem;
