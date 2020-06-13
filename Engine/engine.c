@@ -118,8 +118,6 @@ void_pGameMemory(Start)
 
 	// ---------------
 
-	
-
 	unsigned int indices4[] = { 0, 1, 2, 3, 2, 1 };
 	archetypeFontRenderingComponentTraslationScoreComponent->fontRenderingComponets[0].pIndexBuffer
 		= createIndexBuffer(indices4, NELEMS(indices4));
