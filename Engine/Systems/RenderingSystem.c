@@ -53,7 +53,7 @@ void RenderingSystem(void)
 		pos.y = tc.y;
 		pos.z = tc.z;
 		setBuffers(pos, fc.numIndices, fc.pIndexBuffer, fc.pVertexBuffer);
-		p++;
+		f++;
 		t++;
 	}
 }

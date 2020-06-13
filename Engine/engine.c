@@ -136,7 +136,7 @@ void_pGameMemory(Start)
 		= NELEMS(indices4);
 
 	
-	int idx = 20;
+	int idx = 32;
 	UvMapping uvm1 = getuv(
 		font_Arial.width, 
 		font_Arial.height, 
@@ -145,12 +145,12 @@ void_pGameMemory(Start)
 		characters_Arial[idx].width,
 		characters_Arial[idx].height
 	);
-
+	
 	SimpleVertexCombined fvb[] = {
-		{{-0.1f,  0.1f, 0.0f}, {0.05f, 0.5f, 0.5f, 0.5f}, {uvm1.B,uvm1.R}},
-		{{ 0.1f,  0.1f, 0.0f}, {0.05f, 0.5f, 0.5f, 0.5f}, {uvm1.T,uvm1.R}},
-		{{-0.1f, -0.1f, 0.0f}, {0.05f, 0.5f, 0.5f, 0.5f}, {uvm1.B,uvm1.L}},
-		{{ 0.1f, -0.1f, 0.0f}, {0.05f, 0.5f, 0.5f, 0.5f}, {uvm1.T,uvm1.L}},
+		{{-0.1f,  0.1f, 0.0f}, {0.05f, 0.5f, 0.5f, 0.5f}, {uvm1.L, uvm1.T}},
+		{{ 0.1f,  0.1f, 0.0f}, {0.05f, 0.5f, 0.5f, 0.5f}, {uvm1.R, uvm1.T}},
+		{{-0.1f, -0.1f, 0.0f}, {0.05f, 0.5f, 0.5f, 0.5f}, {uvm1.L, uvm1.B}},
+		{{ 0.1f, -0.1f, 0.0f}, {0.05f, 0.5f, 0.5f, 0.5f}, {uvm1.R, uvm1.B}},
 	};
 	
 	archetypeFontRenderingComponentTraslationScoreComponent->fontRenderingComponets[0].pVertexBuffer
@@ -184,11 +184,12 @@ void_pGameMemory(Start)
 		characters_Arial[idx2].height
 	);
 
+	
 	SimpleVertexCombined fvb2[] = {
-		{{-0.1f,  0.1f, 0.0f}, {0.05f, 0.5f, 0.5f, 0.5f}, {uvm2.B,uvm2.R}},
-		{{ 0.1f,  0.1f, 0.0f}, {0.05f, 0.5f, 0.5f, 0.5f}, {uvm2.T,uvm2.R}},
-		{{-0.1f, -0.1f, 0.0f}, {0.05f, 0.5f, 0.5f, 0.5f}, {uvm2.B,uvm2.L}},
-		{{ 0.1f, -0.1f, 0.0f}, {0.05f, 0.5f, 0.5f, 0.5f}, {uvm2.T,uvm2.L}},
+		{{-0.1f,  0.1f, 0.0f}, {0.05f, 0.5f, 0.5f, 0.5f}, {uvm2.L, uvm2.T}},
+		{{ 0.1f,  0.1f, 0.0f}, {0.05f, 0.5f, 0.5f, 0.5f}, {uvm2.R, uvm2.T}},
+		{{-0.1f, -0.1f, 0.0f}, {0.05f, 0.5f, 0.5f, 0.5f}, {uvm2.L, uvm2.B}},
+		{{ 0.1f, -0.1f, 0.0f}, {0.05f, 0.5f, 0.5f, 0.5f}, {uvm2.R, uvm2.B}},
 	};
 	
 	archetypeFontRenderingComponentTraslationScoreComponent->

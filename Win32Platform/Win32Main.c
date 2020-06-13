@@ -375,7 +375,24 @@ WinMain(HINSTANCE Instance,
 	d3dctx->lpVtbl->PSSetShader(d3dctx, pPS, 0, 0);
 	d3dctx->lpVtbl->PSSetSamplers(d3dctx, 0, 1, &m_sampleState);
 
-	hr = D3DX11CreateShaderResourceViewFromFile(d3ddev, L"awdli-om21s.dds", NULL, NULL, &m_texture, NULL);
+	D3DX11_IMAGE_LOAD_INFO dili = { 0 };
+	
+	dili.Width = 341;
+	dili.Height = 125;
+	dili.Depth = D3DX11_DEFAULT;
+	dili.FirstMipLevel = D3DX11_DEFAULT;
+	dili.MipLevels = D3DX11_DEFAULT;
+	dili.Usage = (D3D11_USAGE)D3DX11_DEFAULT;
+	dili.BindFlags = D3DX11_DEFAULT;
+	dili.CpuAccessFlags = D3DX11_DEFAULT;
+	dili.MiscFlags = D3DX11_DEFAULT;
+	dili.Format = DXGI_FORMAT_FROM_FILE;
+	dili.Filter = D3DX11_DEFAULT;
+	dili.MipFilter = D3DX11_DEFAULT;
+	dili.pSrcInfo = NULL;
+	
+
+	hr = D3DX11CreateShaderResourceViewFromFile(d3ddev, L"awdli-om21s.dds", &dili, NULL, &m_texture, NULL);
 	
 	ShowWindow(WindowHandle, ShowCode);
 
