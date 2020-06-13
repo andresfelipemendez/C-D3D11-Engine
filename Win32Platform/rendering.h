@@ -44,6 +44,7 @@ unsigned int bufferNumber;
 void InitMatrixTransform();
 
 void* CreateIndexBuffer(unsigned int * indices, unsigned int size);
+void* UpdateVertexBuffer(void* vertexBuffer, SimpleVertexCombined* vertices, unsigned int size);
 void* CreateVertexBuffer(SimpleVertexCombined* vertices, unsigned int size);
 
 void CalculateMatrix(vector3 position);

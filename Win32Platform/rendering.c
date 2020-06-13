@@ -1,10 +1,6 @@
 #include "rendering.h"
 #include "../Engine/Components/RenderingComponent.h"
 
-
-
-
-
 void InitMatrixTransform() 
 {	
 	float fieldOfView = (float)PI / 4.0f;
@@ -73,11 +69,20 @@ void* CreateVertexBuffer(SimpleVertexCombined* vertices, unsigned int size)
 
 	unsigned int sovc = sizeof(vertices[0]) * size;
 	D3D11_MAPPED_SUBRESOURCE ms;
+
 	d3dctx->lpVtbl->Map(d3dctx, pVertexBuffer, NULL, D3D11_MAP_WRITE_DISCARD, NULL, &ms);
 	memcpy(ms.pData, vertices, sizeof(vertices[0]) * size);
 	d3dctx->lpVtbl->Unmap(d3dctx, pVertexBuffer, NULL);
 
 	return pVertexBuffer;
+}
+
+void* UpdateVertexBuffer(void* vertexBuffer, SimpleVertexCombined* vertices, unsigned int size)
+{
+	D3D11_MAPPED_SUBRESOURCE ms;
+	d3dctx->lpVtbl->Map(d3dctx, vertexBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &ms);
+	memcpy(ms.pData, vertices, sizeof(vertices[0]) * size);
+	d3dctx->lpVtbl->Unmap(d3dctx, vertexBuffer, 0);
 }
 
 void CalculateMatrix(vector3 position) {
@@ -110,9 +115,7 @@ void CalculateMatrix(vector3 position) {
 void SetBuffers(vector3 pos, unsigned int numIndices, void* indexBuffer, void* vertexBuffer) 
 {
 	D3D11_MAPPED_SUBRESOURCE resource;
-	/*d3dDeviceContext->Map(vertexBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &resource);
-	memcpy(resource.pData, sourceData, vertexDataSize);
-	d3dDeviceContext->Unmap(vertexBuffer, 0);*/
+	
 
 	CalculateMatrix(pos);
 

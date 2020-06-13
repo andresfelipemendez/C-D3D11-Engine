@@ -13,6 +13,10 @@ unsigned int* pNumentitiesAFTS = &numentitiesAFTS;
 
 void InitEntityManager(char* memory) 
 {
+	numentitiesARRTI = 2;
+	numentitiesARRTB = 1;
+	numentitiesAFTS = 2;
+
 	archetypeRendererTraslationInput = memory;
 	archetypeRendererTraslationInput->renderingComponents = NULL;
 	archetypeRendererTraslationInput->translations= NULL;
@@ -22,53 +26,36 @@ void InitEntityManager(char* memory)
 		archetypeRendererTraslationInput + 1;
 
 	archetypeRendererTraslationInput->rectangles =
-		archetypeRendererTraslationInput->renderingComponents + 2;
+		archetypeRendererTraslationInput->renderingComponents + numentitiesARRTI;
 
 	archetypeRendererTraslationInput->translations = 
-		archetypeRendererTraslationInput->rectangles + 2;
+		archetypeRendererTraslationInput->rectangles + numentitiesARRTI;
 
 	archetypeRendererTraslationInput->inputComponents =
-		archetypeRendererTraslationInput->translations + 2;
-
+		archetypeRendererTraslationInput->translations + numentitiesARRTI;
 
 	archetypeRendererTraslationBounce = 
-		archetypeRendererTraslationInput->inputComponents + 2;
-
-	archetypeRendererTraslationBounce->renderingComponents = NULL;
-	archetypeRendererTraslationBounce->translations = NULL;
-	archetypeRendererTraslationBounce->bounceComponents = NULL;
+		archetypeRendererTraslationInput->inputComponents + numentitiesARRTI;
 
 	archetypeRendererTraslationBounce->renderingComponents = 
 		archetypeRendererTraslationBounce + 1;
 
 	archetypeRendererTraslationBounce->translations =
-		archetypeRendererTraslationBounce->renderingComponents + 1;
+		archetypeRendererTraslationBounce->renderingComponents + numentitiesARRTB;
 	
 	archetypeRendererTraslationBounce->bounceComponents =
-		archetypeRendererTraslationBounce->translations + 1;
-
-	archetypeFontRenderingComponentTraslationScoreComponent = NULL;
+		archetypeRendererTraslationBounce->translations + numentitiesARRTB;
 	
 	archetypeFontRenderingComponentTraslationScoreComponent = 
-		archetypeRendererTraslationBounce->bounceComponents + 1;
-
-	archetypeFontRenderingComponentTraslationScoreComponent->fontRenderingComponets = NULL;
-	archetypeFontRenderingComponentTraslationScoreComponent->translations = NULL;
-	archetypeFontRenderingComponentTraslationScoreComponent->scores = NULL;
+		archetypeRendererTraslationBounce->bounceComponents + numentitiesARRTB;
 
 	archetypeFontRenderingComponentTraslationScoreComponent->fontRenderingComponets = 
 		archetypeFontRenderingComponentTraslationScoreComponent + 1;
 
 	archetypeFontRenderingComponentTraslationScoreComponent->translations = 
-		archetypeFontRenderingComponentTraslationScoreComponent->fontRenderingComponets + 2;
+		archetypeFontRenderingComponentTraslationScoreComponent->fontRenderingComponets + numentitiesAFTS;
 
 	archetypeFontRenderingComponentTraslationScoreComponent->scores =
-		archetypeFontRenderingComponentTraslationScoreComponent->translations + 2;
-
-	// todo change constants for this
-	numentitiesARRTI = 2;
-	numentitiesARRTB = 1;
-	numentitiesAFTS = 2;
-
+		archetypeFontRenderingComponentTraslationScoreComponent->translations + numentitiesAFTS;
 }
 
