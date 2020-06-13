@@ -4,6 +4,7 @@
 
 
 
+
 void InitMatrixTransform() 
 {	
 	float fieldOfView = (float)PI / 4.0f;
