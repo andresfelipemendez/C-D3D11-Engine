@@ -93,8 +93,8 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Lib\x86;C:\Program Files (x86)\Windows Kits\10\Lib\10.0.18362.0\um\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>User32.lib;Gdi32.lib;dxguid.lib;DXGI.lib;D3D11.lib;D3DX11.lib;D3DCompiler.lib;D3dx9.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Program Files (x86)\Windows Kits\10\Lib\10.0.18362.0\um\x86;C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>D3DCompiler.lib;d3d11.lib;User32.lib;Gdi32.lib;dxguid.lib;DXGI.lib;D3D11.lib;D3DX11.lib;D3dx9.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>
@@ -130,8 +130,8 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Lib\x86;C:\Program Files (x86)\Windows Kits\10\Lib\10.0.18362.0\um\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>User32.lib;Gdi32.lib;dxguid.lib;DXGI.lib;D3D11.lib;D3DX11.lib;D3DCompiler.lib;D3dx9.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Program Files (x86)\Windows Kits\10\Lib\10.0.18362.0\um\x86;C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>D3DCompiler.lib;d3d11.lib;User32.lib;Gdi32.lib;dxguid.lib;DXGI.lib;D3D11.lib;D3DX11.lib;D3dx9.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>
