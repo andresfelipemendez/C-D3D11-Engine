@@ -1,3 +1,6 @@
+
+![](pong-c.gif)
+
 # DOD Engine
 
 Game Engine develop to put in practice data-oriented design wisdom
@@ -15,21 +18,6 @@ I expect to replace Direct X SDK implementing a simple math lib
 - Only C language 
 - DLL Hot Reload
 - ECS
-
-
-## Game TODO
-- [ ] Ball physics
-- [ ] Game Logic, scores and that kind of stuff
-
-## Engine TODO
-perhaps this won't be added to this version of the engine but I keep this in the horizon
-- [ ] PBR
-- [ ] Multi-platform support, 
-	- [ ] Linux
-    - [ ] OSX
-	- [ ] Vulkan
-	- [ ] OpenGL
-	- [ ] Metal
 
 # Build instructions
 

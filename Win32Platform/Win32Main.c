@@ -14,9 +14,9 @@ typedef struct
 {
     HMODULE gameCodeDLL;
     FILETIME DLLLastWriteTime;
-    start *Start;
-    update *Update;
-    set_method_pointers* SetMethodPointers;
+	pGameMemory* Start;
+	pGameMemory* Update;
+	pGameMemory* SetMethodPointers;
 } win32_engine_code;
 
 const int SCREEN_WIDTH = 800;
@@ -215,9 +215,9 @@ static win32_engine_code Wind32LoadGame(void)
 	engineMethods.gameCodeDLL = LoadLibrary(TempDLLName);
 	if (engineMethods.gameCodeDLL)
 	{
-		engineMethods.Start = (start *)GetProcAddress(engineMethods.gameCodeDLL, "Start");
-		engineMethods.Update = (update *)GetProcAddress(engineMethods.gameCodeDLL, "Update");
-		engineMethods.SetMethodPointers = (set_method_pointers *)GetProcAddress(engineMethods.gameCodeDLL, "SetMethodPointers");
+		engineMethods.Update = (pGameMemory*)GetProcAddress(engineMethods.gameCodeDLL, "Update");
+		engineMethods.Start = (pGameMemory*)GetProcAddress(engineMethods.gameCodeDLL, "Start");
+		engineMethods.SetMethodPointers = (pGameMemory*)GetProcAddress(engineMethods.gameCodeDLL, "SetMethodPointers");
 	} else {
 		ErrorExit(TEXT("load engine lib"));
 	}

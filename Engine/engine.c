@@ -13,6 +13,10 @@ vector3 add(vector3 a, vector3 b)
     return r;
 }
 
+void_pGameMemory(Update) {
+	runSystems();
+}
+
 void_pGameMemory(SetMethodPointers)
 {
 	ptr = malloc(sizeof(void*));
@@ -178,6 +182,3 @@ void_pGameMemory(Start)
 	archetypeFontRenderingComponentTraslationScoreComponent->scores[1] = 0;
 }
 
-void_pGameMemory(Update) {
-    runSystems();
-}

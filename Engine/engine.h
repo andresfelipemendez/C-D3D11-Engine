@@ -67,7 +67,15 @@ typedef struct {
         print *Print;
 } GameMemory;
 
+           /*__declspec(dllexport)
+extern "C" __declspec(dllexport) void __cdecl*/
+
 #define void_pGameMemory(name) DllExport void name(GameMemory* memory)
-typedef void_pGameMemory(start);
-typedef void_pGameMemory(set_method_pointers);
-typedef void_pGameMemory(update);
+typedef void_pGameMemory(pGameMemory);
+
+void_pGameMemory(Start);
+void_pGameMemory(SetMethodPointers);
+void_pGameMemory(Update);
+
+//typedef void_pGameMemory(set_method_pointers);
+//typedef void_pGameMemory(update);
