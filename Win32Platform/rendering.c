@@ -5,7 +5,7 @@ void InitMatrixTransform()
 {	
 	float fieldOfView = (float)PI / 4.0f;
 	float screenAspect = (float)800 / (float)600;
-	D3DXMatrixPerspectiveFovLH(&projectionMatrix, fieldOfView, screenAspect, 0.03f, 100.0f);
+	MatPerspectiveFovLH(&projectionMatrix, fieldOfView, screenAspect, 0.03f, 100.0f);
 
 	D3D11_BUFFER_DESC matrixBufferDesc;
 	matrixBufferDesc.Usage = D3D11_USAGE_DYNAMIC;
@@ -16,9 +16,9 @@ void InitMatrixTransform()
 	matrixBufferDesc.StructureByteStride = 0;
 	HRESULT result = d3ddev->lpVtbl->CreateBuffer(d3ddev, &matrixBufferDesc, NULL, &m_matrixBuffer);
 
-	D3DXMatrixIdentity(&worldMatrix);
-	D3DXMatrixTranspose(&worldMatrix, &worldMatrix);
-	D3DXMatrixTranspose(&projectionMatrix, &projectionMatrix);
+	MatIdentity(&worldMatrix);
+	MatTranspose(&worldMatrix, &worldMatrix);
+	MatTranspose(&projectionMatrix, &projectionMatrix);
 
 	vector3 position = {0};
 	position.x = 0;
@@ -101,15 +101,15 @@ void CalculateMatrix(vector3 position) {
 	rot.y = 0; //pitch
 	rot.z = 0; //roll
 
-	D3DXMatrixRotationYawPitchRoll(&rotationMatrix, rot.x, rot.y, rot.z);
+	MatRotationYawPitchRoll(&rotationMatrix, rot.x, rot.y, rot.z);
 
-	D3DXVec3TransformCoord(&lookAt, &lookAt, &rotationMatrix);
-	D3DXVec3TransformCoord(&up, &up, &rotationMatrix);
+	Vec3TransformCoord(&lookAt, &lookAt, &rotationMatrix);
+	Vec3TransformCoord(&up, &up, &rotationMatrix);
 
 	lookAt = add(position, lookAt);
 
-	D3DXMatrixLookAtLH(&viewMatrix, &position, &lookAt, &up);
-	D3DXMatrixTranspose(&viewMatrix, &viewMatrix);
+	MatLookAtLH(&viewMatrix, &position, &lookAt, &up);
+	MatTranspose(&viewMatrix, &viewMatrix);
 }
 
 void SetBuffers(vector3 pos, unsigned int numIndices, void* indexBuffer, void* vertexBuffer) 

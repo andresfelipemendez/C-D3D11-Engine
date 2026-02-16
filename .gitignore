@@ -340,3 +340,9 @@ ASALocalRun/
 healthchecksdb
 
 *.zip
+/uprof_out
+
+# Build artifacts
+*.dll
+*.exp
+*.lib

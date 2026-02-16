@@ -22,7 +22,7 @@ typedef pVoid_pVertexUint(create_vertex_buffer);
 
 
 void* pUpdateVertexBuffer;
-typedef void* (*UpdateVertexBuffer_f)(unsigned int*, unsigned int);
+typedef void* (*UpdateVertexBuffer_f)(void*, SimpleVertexCombined*, unsigned int);
 #define updateVertexBuffer ((UpdateVertexBuffer_f) pUpdateVertexBuffer)
 
 #define pVoid_pVertexVertexUint(name) void* name(void* pVertexBuffer, SimpleVertexCombined* newVertexBuffer, unsigned int size)

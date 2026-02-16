@@ -2,16 +2,17 @@
 
 #include <d3d11.h>
 #include <d3dcompiler.h>
-#include <D3DX11async.h>
-#include <D3DX10math.h>
 
 #include "../Engine/engine.h"
 
+#include "mathlib.h"
+#include "dds_loader.h"
+
 typedef struct
 {
-    D3DXMATRIX world;
-    D3DXMATRIX view;
-    D3DXMATRIX projection;
+    Mat4 world;
+    Mat4 view;
+    Mat4 projection;
 } MatrixBufferType;
 
 ID3D11Device* d3ddev;
@@ -36,8 +37,8 @@ ID3D11Buffer* m_matrixBuffer;
 D3D11_MAPPED_SUBRESOURCE mappedResource;
 MatrixBufferType *dataPtr;
 
-D3DMATRIX viewMatrix, projectionMatrix, worldMatrix;
-D3DMATRIX rotationMatrix;
+Mat4 viewMatrix, projectionMatrix, worldMatrix;
+Mat4 rotationMatrix;
 
 unsigned int bufferNumber;
 
